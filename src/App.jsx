@@ -1,13 +1,24 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 import Header from './components/Header.jsx';
+import Login from './pages/Login.jsx';
 
 function App() {
   return (
-    <Router>
-      <ConditionalHeader />
-      <Routes></Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ConditionalHeader />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
@@ -27,7 +38,18 @@ function ConditionalHeader() {
       backUrl = '/';
   }
 
-  return <Header backUrl={backUrl} />;
+
+  let containProfileDropdown = true;
+  switch (location.pathname) {
+    case '/login':
+    case '/register':
+      containProfileDropdown = false;
+      break;
+    default:
+        containProfileDropdown = true;
+  }
+
+  return <Header backUrl={backUrl} containProfileDropdown={containProfileDropdown} />;
 }
 
 export default App;
