@@ -101,7 +101,7 @@ body {
   opacity: 1; /* 활성화 상태에서 투명도 제거 */
 }
 
-.register-btn {
+.register-link-btn {
   text-decoration: none;
   color: #000000;
   font-weight: regular;

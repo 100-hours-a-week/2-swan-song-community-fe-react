@@ -97,7 +97,7 @@ export default function Login() {
             >
               로그인
             </button>
-            <a className="register-btn" href="/register">
+            <a className="register-link-btn" href="/register">
               회원가입
             </a>
           </div>
