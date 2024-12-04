@@ -38,7 +38,18 @@ function ConditionalHeader() {
       backUrl = '/';
   }
 
-  return <Header backUrl={backUrl} />;
+
+  let containProfileDropdown = true;
+  switch (location.pathname) {
+    case '/login':
+    case '/register':
+      containProfileDropdown = false;
+      break;
+    default:
+        containProfileDropdown = true;
+  }
+
+  return <Header backUrl={backUrl} containProfileDropdown={containProfileDropdown} />;
 }
 
 export default App;

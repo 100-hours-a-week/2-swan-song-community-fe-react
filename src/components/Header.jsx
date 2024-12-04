@@ -6,8 +6,8 @@ import userDefaultProfile from '../assets/user_default_profile.svg';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 
-export default function Header({ backUrl }) {
-  const { isLoggedIn, profileImage, updateAuthState } = useAuth();
+export default function Header({ backUrl, containProfileDropdown }) {
+  const { profileImage, updateAuthState } = useAuth();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); // 메뉴 열림/닫힘 상태
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Header({ backUrl }) {
           </Link>
         )}
         <h1>아무 말 대잔치</h1>
-        {isLoggedIn && (
+        {containProfileDropdown && (
           <div className="profile-dropdown">
             <img
               id="profileDropDownToggle"
