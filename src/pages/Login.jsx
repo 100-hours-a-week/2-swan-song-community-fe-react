@@ -17,13 +17,13 @@ export default function Login() {
   const isPasswordValid = password.length >= 8;
   const isValid = isEmailValid && isPasswordValid;
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
     if (name === 'email') setEmail(value);
     if (name === 'password') setPassword(value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (!isValid) {
       setErrorMessage('* 아이디나 비밀번호가 형식에 맞지 않습니다.');
