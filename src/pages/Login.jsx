@@ -2,7 +2,7 @@ import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
 import userDefaultProfile from '../assets/user_default_profile.svg';
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import '../stylesheets/pages/login.css';
 
@@ -97,9 +97,9 @@ export default function Login() {
             >
               로그인
             </button>
-            <a className="register-btn" href="/register">
+            <Link className="register-link-btn" to="/register">
               회원가입
-            </a>
+            </Link>
           </div>
           {errorMessage && (
             <div className="login-error-helper" style={{ color: 'red' }}>

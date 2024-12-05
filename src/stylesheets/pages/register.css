@@ -12,7 +12,6 @@ body {
     'Noto Sans KR',
     'Malgun Gothic',
     sans-serif;
-  width: 100%;
   margin: 0;
   padding: 0;
   display: flex;
@@ -20,7 +19,7 @@ body {
   justify-content: center;
 }
 
-.login {
+.register {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,14 +27,14 @@ body {
   margin-top: 50px;
 }
 
-.login-logo-str {
+.register-logo-str {
   font-size: 32px;
   font-weight: bold;
   line-height: 38.19px;
   margin-bottom: 67px;
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,7 +43,7 @@ body {
   padding: 20px;
   border-radius: 5px;
   background-color: #f4f5f7;
-  row-gap: 35px;
+  row-gap: 10px;
 }
 
 .input-box {
@@ -59,7 +58,7 @@ body {
 }
 
 .input-box input {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   padding: 10px;
   border: 1px solid #000000;
   border-radius: 5px;
@@ -67,6 +66,62 @@ body {
 
 .input-box input::placeholder {
   color: #000000;
+}
+
+/* 이미지 전용 input box */
+.input-box-image {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.input-box-image label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.image-placeholder-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background-color: #f0f0f0;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.placeholder-plus {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input-box-image label {
+  font-size: 1rem;
+  color: #333;
 }
 
 .btn-box {
@@ -78,31 +133,26 @@ body {
   row-gap: 10px;
 }
 
-.login-btn {
-  width: 100%;
-  height: 40px;
+.btn-submit {
   border: none;
   border-radius: 5px;
-  background-color: #aca0eb;
-  color: white;
+  background-color: #aca0eb; /*활성화 시 #7F6AEE*/
+  color: #ffffff;
   font-size: 14px;
   font-weight: bold;
-  cursor: not-allowed;
-  opacity: 0.5;
-  transition:
-    background-color 0.3s,
-    opacity 0.3s,
-    cursor 0.3s;
 }
 
-.login-btn:enabled {
-  background-color: #7f6aed; /* 활성화된 버튼 색상 */
-  cursor: pointer;
-  opacity: 1; /* 활성화 상태에서 투명도 제거 */
+.register-btn {
+  width: 100%;
+  padding: 10px;
 }
 
-.register-link-btn {
+.login-redirect-btn {
   text-decoration: none;
   color: #000000;
   font-weight: regular;
+}
+
+.d-block {
+  display: block;
 }

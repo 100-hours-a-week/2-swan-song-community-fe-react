@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import shevlonLeft from '../assets/shevlon_left.svg';
 import userDefaultProfile from '../assets/user_default_profile.svg';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
 
 export default function Header({ backUrl, containProfileDropdown }) {
   const { profileImage, updateAuthState } = useAuth();
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); // 메뉴 열림/닫힘 상태
+  const navigate = useNavigate();
 
   useEffect(() => {
     const sessionId = Cookies.get('session_id');
@@ -49,7 +50,7 @@ export default function Header({ backUrl, containProfileDropdown }) {
       if (response.status === 204) {
         Cookies.remove('session_id');
         updateAuthState(false, userDefaultProfile); // 로그아웃 시 상태 초기화
-        window.location.href = '/login';
+        navigate('/login');
       }
     } catch (error) {
       console.error('로그아웃에 실패했습니다:', error);
