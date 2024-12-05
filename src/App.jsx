@@ -8,6 +8,7 @@ import {
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <ConditionalHeader />
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </AuthProvider>
@@ -38,7 +40,6 @@ function ConditionalHeader() {
       backUrl = '/';
   }
 
-
   let containProfileDropdown = true;
   switch (location.pathname) {
     case '/login':
@@ -46,10 +47,12 @@ function ConditionalHeader() {
       containProfileDropdown = false;
       break;
     default:
-        containProfileDropdown = true;
+      containProfileDropdown = true;
   }
 
-  return <Header backUrl={backUrl} containProfileDropdown={containProfileDropdown} />;
+  return (
+    <Header backUrl={backUrl} containProfileDropdown={containProfileDropdown} />
+  );
 }
 
 export default App;
