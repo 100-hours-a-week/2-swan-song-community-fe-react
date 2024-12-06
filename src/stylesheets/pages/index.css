@@ -1,0 +1,148 @@
+body {
+  background-color: #f4f5f7;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 550px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  width: 60%;
+  max-width: 592px;
+}
+
+.board-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board-header div {
+  font-size: 24px;
+}
+
+.board-action button {
+  width: 138px;
+  height: 39px;
+  border-radius: 16px;
+}
+
+.board-action {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.btn-submit {
+  border: none;
+  border-radius: 5px;
+  background-color: #aca0eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #7f6aee;
+}
+
+.post-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.post-item {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 6px 4px #00000010;
+  background-color: #ffffff;
+}
+
+.post-summary {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  margin: 20px 20px 0px 20px;
+  padding-bottom: 20px;
+}
+
+.post-summary .upper-info .post-title {
+  height: 31px;
+  font-size: 24px;
+  font-weight: bold;
+  max-width: 100%;
+}
+
+.post-summary .down-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #00000095;
+  width: 100%;
+  height: 18px;
+}
+
+.post-summary .down-info .post-reactions {
+  display: flex;
+  height: 18px;
+}
+
+.post-summary .down-info .post-reaction {
+  margin-right: 5px;
+}
+
+.border-line {
+  border-bottom: 1px solid #00000050;
+}
+
+.author-info {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  margin: 0px 20px 20px 20px;
+}
+
+.author-info img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: #000000 0.5px solid;
+  margin-right: 10px;
+}
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
