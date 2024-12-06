@@ -6,21 +6,34 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.jsx';
+import { PagingIdProvider } from './contexts/PagingIdContext.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import Index from './pages/Index.jsx';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <ConditionalHeader />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+    <Router>
+      <PagingIdProvider>
+        <AuthProvider>
+          <ConditionalHeader />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Index />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </AuthProvider>
+      </PagingIdProvider>
+    </Router>
   );
 }
 
