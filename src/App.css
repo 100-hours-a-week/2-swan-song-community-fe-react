@@ -1,3 +1,27 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f5f7;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    sans-serif;
+}
+
 .text-bold {
   font-weight: bold;
 }
@@ -9,7 +33,6 @@
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #000000;
-  position: fixed;
   top: 0;
   left: 0;
   background-color: white;
