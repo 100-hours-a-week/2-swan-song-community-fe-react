@@ -1,0 +1,11 @@
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}

@@ -1,0 +1,48 @@
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputBoxDiv {
+  padding: 25px;
+  border-bottom: 1px solid #00000040;
+}
+
+.inputBoxLabel {
+  margin-bottom: 5px;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.inputBoxInput {
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  background-color: #ffffff00;
+}
+
+.inputBoxInput::placeholder {
+  color: #000000;
+}
+
+.textArea {
+  width: 100%;
+  height: auto;
+  padding: 15px;
+  border-radius: 8px;
+  border: none;
+  overflow-y: auto;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #ffffff00;
+  min-height: 300px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.textArea::-webkit-scrollbar {
+  display: none;
+}
