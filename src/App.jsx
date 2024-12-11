@@ -12,6 +12,7 @@ import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Index from './pages/Index.jsx';
+import PostUpload from './pages/PostUpload.jsx';
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Index />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/post-upload"
+              element={
+                <ProtectedRoute>
+                  <PostUpload />
                 </ProtectedRoute>
               }
             />
