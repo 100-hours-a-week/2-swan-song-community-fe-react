@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { usePagingId } from '../../contexts/PagingIdContext';
 
 import InputField from '../ui/InputField';
 import FileInput from '../ui/FileInput';
@@ -7,10 +9,14 @@ import styles from './PostUploadForm.module.css';
 import { API_BASE_URL } from '../../constants/api';
 
 const PostUploadForm = () => {
+    const { posts, setPosts } = usePagingId();
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [isValid, setIsValid] = useState(false);
+
+  const navigate = useNavigate();
 
   const validateInputs = () => {
     const isTitleFilled = title.trim() !== '' && title.length <= 26;
@@ -68,7 +74,8 @@ const PostUploadForm = () => {
       const result = await uploadPost(formData);
 
       if (result.code === 2001) {
-        window.location.href = '/';
+        setPosts([result.data, ...posts]);
+        navigate('/');
       } else {
         console.error('업로드 실패:', result.message);
       }
@@ -94,6 +101,11 @@ const PostUploadForm = () => {
           value={title}
           onChange={handleTitleChange}
           placeholder="제목을 입력하세요. (최대 26글자)"
+          className={{
+            inputBox:styles.inputBox,
+            inputBoxLabel:styles.inputBoxLabel,
+            inputBoxInput:styles.inputBoxInput,
+          }}
         />
         <InputField
           label="내용*"
@@ -102,6 +114,12 @@ const PostUploadForm = () => {
           onChange={handleContentChange}
           placeholder="내용을 입력해주세요."
           isTextArea
+          className={{
+            inputBox:styles.inputBox,
+            inputBoxLabel:styles.inputBoxLabel,
+            inputBoxInput:styles.inputBoxInput,
+            textArea:styles.inputBoxTextarea,
+          }}
         />
         <span
           className={styles.helperText}
@@ -114,10 +132,11 @@ const PostUploadForm = () => {
           name="postImage"
           onChange={handleImageChange}
         />
-        <SubmitButton isValid={isValid} label="생성하기" />
+        <SubmitButton isValid={isValid} label="생성하기" className={styles.postUploadBtn}/>
       </form>
     </section>
   );
 };
 
 export default PostUploadForm;
+
