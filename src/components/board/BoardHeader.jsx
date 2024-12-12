@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./BoardHeader.module.css";
+import React from 'react';
+import styles from './BoardHeader.module.css';
 
 const BoardHeader = () => {
   return (

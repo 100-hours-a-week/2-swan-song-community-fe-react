@@ -1,14 +1,17 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./PostItem.module.css";
-import userDefaultProfile from "../../assets/user_default_profile.svg";
-import { IMAGE_BASE_URL } from "../../constants/api";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './PostItem.module.css';
+import userDefaultProfile from '../../assets/user_default_profile.svg';
+import { IMAGE_BASE_URL } from '../../constants/api';
 
 const PostItem = ({ post }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.postItem} onClick={() => navigate(`/post-detail/${post.postId}`)}>
+    <div
+      className={styles.postItem}
+      onClick={() => navigate(`/post-detail/${post.postId}`)}
+    >
       <div className={styles.postSummary}>
         <div className={styles.upperInfo}>
           <div className={styles.postTitle}>{post.title}</div>
@@ -31,7 +34,11 @@ const PostItem = ({ post }) => {
       <div className={styles.authorInfo}>
         <img
           className={styles.profileImage}
-          src={post.profileImageUrl ? `${IMAGE_BASE_URL}/${post.profileImageUrl}` : userDefaultProfile}
+          src={
+            post.profileImageUrl
+              ? `${IMAGE_BASE_URL}/${post.profileImageUrl}`
+              : userDefaultProfile
+          }
           alt="프로필 이미지"
         />
         <div className={styles.authorName}>{post.authorName}</div>

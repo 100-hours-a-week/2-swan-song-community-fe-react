@@ -21,12 +21,12 @@ export default function Login() {
   const isPasswordValid = formData.password.length >= 8;
   const isValid = isEmailValid && isPasswordValid;
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (!isValid) {
@@ -78,14 +78,19 @@ export default function Login() {
           onChange={handleInputChange}
           placeholder="비밀번호를 입력하세요"
         />
-        { !isValid &&
-            <HelperText errorClassName={styles.loginErrorHelper} error={"* 아이디나 비밀번호가 형식에 맞지 않습니다."} />
-        }
+        {!isValid && (
+          <HelperText
+            errorClassName={styles.loginErrorHelper}
+            error={'* 아이디나 비밀번호가 형식에 맞지 않습니다.'}
+          />
+        )}
         <div className={styles.btnBox}>
           <SubmitButton
             isValid={isValid}
             label="로그인"
-            className={classNames(styles.loginBtn, { [styles.loginBtnEnabled]: isValid })}
+            className={classNames(styles.loginBtn, {
+              [styles.loginBtnEnabled]: isValid,
+            })}
           />
           <Link className={styles.registerLinkBtn} to="/register">
             회원가입

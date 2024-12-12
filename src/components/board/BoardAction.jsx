@@ -1,7 +1,7 @@
-import React from "react";
-import Button from "../ui/Button.jsx";
-import styles from "./BoardAction.module.css";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import Button from '../ui/Button.jsx';
+import styles from './BoardAction.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const BoardAction = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const BoardAction = () => {
       <Button
         label="게시글 작성"
         type="button"
-        onClick={() => navigate("/post-upload")}
+        onClick={() => navigate('/post-upload')}
         className={styles.btnSubmit}
       />
     </div>

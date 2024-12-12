@@ -66,11 +66,15 @@ export default function Header({ backUrl, containProfileDropdown }) {
     <header className={styles.globalNavbar}>
       <div className={styles.globalNavbarContent}>
         {backUrl && (
-        <div className={styles.back}>
+          <div className={styles.back}>
             <Link to={backUrl}>
-            <img className={styles.backImg} src={shevlonLeft} alt="뒤로가기" />
-          </Link>
-            </div>
+              <img
+                className={styles.backImg}
+                src={shevlonLeft}
+                alt="뒤로가기"
+              />
+            </Link>
+          </div>
         )}
         <h1 className={styles.headerTitle}>아무 말 대잔치</h1>
         {containProfileDropdown && (

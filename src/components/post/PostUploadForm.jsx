@@ -9,7 +9,7 @@ import styles from './PostUploadForm.module.css';
 import { API_BASE_URL } from '../../constants/api';
 
 const PostUploadForm = () => {
-    const { posts, setPosts } = usePagingId();
+  const { posts, setPosts } = usePagingId();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -102,9 +102,9 @@ const PostUploadForm = () => {
           onChange={handleTitleChange}
           placeholder="제목을 입력하세요. (최대 26글자)"
           className={{
-            inputBox:styles.inputBox,
-            inputBoxLabel:styles.inputBoxLabel,
-            inputBoxInput:styles.inputBoxInput,
+            inputBox: styles.inputBox,
+            inputBoxLabel: styles.inputBoxLabel,
+            inputBoxInput: styles.inputBoxInput,
           }}
         />
         <InputField
@@ -115,10 +115,10 @@ const PostUploadForm = () => {
           placeholder="내용을 입력해주세요."
           isTextArea
           className={{
-            inputBox:styles.inputBox,
-            inputBoxLabel:styles.inputBoxLabel,
-            inputBoxInput:styles.inputBoxInput,
-            textArea:styles.inputBoxTextarea,
+            inputBox: styles.inputBox,
+            inputBoxLabel: styles.inputBoxLabel,
+            inputBoxInput: styles.inputBoxInput,
+            textArea: styles.inputBoxTextarea,
           }}
         />
         <span
@@ -132,11 +132,14 @@ const PostUploadForm = () => {
           name="postImage"
           onChange={handleImageChange}
         />
-        <SubmitButton isValid={isValid} label="생성하기" className={styles.postUploadBtn}/>
+        <SubmitButton
+          isValid={isValid}
+          label="생성하기"
+          className={styles.postUploadBtn}
+        />
       </form>
     </section>
   );
 };
 
 export default PostUploadForm;
-

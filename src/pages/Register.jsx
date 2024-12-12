@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import classNames from 'classnames';
 import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
-import ProfileImageInput from '../components/ui/ProfileImageInput'
+import ProfileImageInput from '../components/ui/ProfileImageInput';
 import styles from './Register.module.css';
 import { API_BASE_URL } from '../constants/api';
 
@@ -213,7 +213,7 @@ export default function Register() {
               nicknameStatus === 'success'
             }
             label="회원가입"
-            className={classNames(styles.btnSubmit, styles.registerBtn) }
+            className={classNames(styles.btnSubmit, styles.registerBtn)}
           />
           <Link className={styles.loginRedirectBtn} to="/login">
             로그인 하러가기

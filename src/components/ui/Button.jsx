@@ -1,16 +1,22 @@
-import React from "react";
-import styles from "./Button.module.css";
+import React from 'react';
+import styles from './Button.module.css';
 
-const Button = ({ isValid = true, label, onClick, className, type="button" }) => {
+const Button = ({
+  isValid = true,
+  label,
+  onClick,
+  className,
+  type = 'button',
+}) => {
   return (
-      <button
-        className={`${styles.defaultBtn} ${className || ""}`}
-        type={type}
-        disabled={!isValid}
-        onClick={onClick}
-      >
-        {label}
-      </button>
+    <button
+      className={`${styles.defaultBtn} ${className || ''}`}
+      type={type}
+      disabled={!isValid}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 };
 

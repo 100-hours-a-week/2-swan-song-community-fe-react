@@ -16,15 +16,29 @@ const InputField = ({
   className,
 }) => {
   return (
-    <div className={classNames(styles.inputBox, (className?.inputBox ? className.inputBox : undefined))}>
-      <label htmlFor={name} className={classNames(styles.inputBoxLabel, (className?.inputBoxLabel ? className.inputBoxLabel : undefined))}>
+    <div
+      className={classNames(
+        styles.inputBox,
+        className?.inputBox ? className.inputBox : undefined,
+      )}
+    >
+      <label
+        htmlFor={name}
+        className={classNames(
+          styles.inputBoxLabel,
+          className?.inputBoxLabel ? className.inputBoxLabel : undefined,
+        )}
+      >
         {label}
       </label>
       {isTextArea ? (
         <textarea
           id={name}
           name={name}
-          className={classNames(styles.textArea, (className?.textArea ? className.textArea : undefined))}
+          className={classNames(
+            styles.textArea,
+            className?.textArea ? className.textArea : undefined,
+          )}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
@@ -35,7 +49,10 @@ const InputField = ({
           id={name}
           type={type}
           name={name}
-          className={classNames(styles.inputBoxInput, (className?.inputBoxInput ? className.inputBoxInput : undefined))}
+          className={classNames(
+            styles.inputBoxInput,
+            className?.inputBoxInput ? className.inputBoxInput : undefined,
+          )}
           value={value}
           onChange={onChange}
           placeholder={placeholder}

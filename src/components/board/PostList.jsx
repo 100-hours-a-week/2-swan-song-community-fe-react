@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./PostList.module.css";
-import PostItem from "./PostItem";
+import React from 'react';
+import styles from './PostList.module.css';
+import PostItem from './PostItem';
 
 const PostList = ({ posts }) => {
   return (

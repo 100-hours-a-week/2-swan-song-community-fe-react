@@ -5,7 +5,7 @@ import addFileImage from '../../assets/add_round_light.svg';
 const FileInput = ({ label, name, onChange, preview }) => {
   const [imagePreview, setImagePreview] = useState(preview);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = event => {
     const file = event.target.files[0];
     if (file) {
       const previewUrl = URL.createObjectURL(file);
