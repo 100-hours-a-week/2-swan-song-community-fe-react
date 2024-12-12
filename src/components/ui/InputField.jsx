@@ -1,44 +1,46 @@
 import React from 'react';
+import classNames from 'classnames';
 import styles from './InputField.module.css';
 
 const InputField = ({
   label,
   name,
   value,
+  type,
   onChange,
   placeholder,
   isTextArea,
+  error,
+  errorClassName,
+  className,
 }) => {
   return (
-    <div className={styles.inputBox}>
-      <div className={styles.inputBoxDiv}>
-        <label htmlFor={name} className={styles.inputBoxLabel}>
-          {label}
-        </label>
-      </div>
-      <div className={styles.inputBoxDiv}>
-        {isTextArea ? (
-          <textarea
-            id={name}
-            name={name}
-            className={styles.textArea}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            cols="30"
-          ></textarea>
-        ) : (
-          <input
-            id={name}
-            type="text"
-            name={name}
-            className={styles.inputBoxInput}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-          />
-        )}
-      </div>
+    <div className={classNames(styles.inputBox, (className?.inputBox ? className.inputBox : undefined))}>
+      <label htmlFor={name} className={classNames(styles.inputBoxLabel, (className?.inputBoxLabel ? className.inputBoxLabel : undefined))}>
+        {label}
+      </label>
+      {isTextArea ? (
+        <textarea
+          id={name}
+          name={name}
+          className={classNames(styles.textArea, (className?.textArea ? className.textArea : undefined))}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          cols="30"
+        ></textarea>
+      ) : (
+        <input
+          id={name}
+          type={type}
+          name={name}
+          className={classNames(styles.inputBoxInput, (className?.inputBoxInput ? className.inputBoxInput : undefined))}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
+      )}
+      {error && <span className={ (!errorClassName ? styles.helperText : styles.success) }>{error}</span>}
     </div>
   );
 };
