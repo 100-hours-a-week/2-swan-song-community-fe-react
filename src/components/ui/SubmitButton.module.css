@@ -1,26 +1,24 @@
 .btnBox {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.submitBtn {
-  border: none;
-  border-radius: 5px;
-  background-color: #aca0eb; /* 활성화 시 색상 */
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.submitBtn:disabled {
-  background-color: #ddd;
-  cursor: not-allowed;
-}
-
-.postUploadBtn {
-  width: 50%;
-  padding: 10px;
-}
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .submitBtn {
+    border: none;
+    border-radius: 5px;
+    background-color: #aca0eb; /* 기본 비활성화 상태 */
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .submitBtn:hover {
+    background-color: #aca0eb; /* 기본 호버 상태 */
+  }
+  
+  .submitBtn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
