@@ -1,0 +1,64 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .registerLogoStr {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 38.19px;
+    margin-bottom: 67px;
+  }
+  
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f4f5f7;
+    row-gap: 10px;
+  }
+  
+  .inputField {
+    margin-bottom: 15px;
+  }
+  
+  .fileInput {
+    margin-bottom: 15px;
+  }
+  
+  .btnBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    row-gap: 10px;
+  }
+  
+  .btnSubmit {
+    border: none;
+    border-radius: 5px;
+    background-color: #aca0eb; /*활성화 시 #7F6AEE*/
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.registerBtn {
+    width: 100%;
+    padding: 10px;
+}
+
+  .loginRedirectBtn {
+    text-decoration: none;
+    color: #000000;
+    font-weight: regular;
+  }
+  
