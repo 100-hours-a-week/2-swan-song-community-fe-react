@@ -21,15 +21,3 @@
   .textArea::placeholder {
     color: #888;
   }
-  
-  .helperText {
-    color: red;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-
-  .success {
-    color: blue;
-    font-size: 12px;
-    margin-top: 5px;
-  }

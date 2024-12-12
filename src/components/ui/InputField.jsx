@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './InputField.module.css';
+import HelperText from './HelperText';
 
 const InputField = ({
   label,
@@ -40,7 +41,7 @@ const InputField = ({
           placeholder={placeholder}
         />
       )}
-      {error && <span className={ (!errorClassName ? styles.helperText : styles.success) }>{error}</span>}
+      {error && <HelperText errorClassName={errorClassName} error={error} />}
     </div>
   );
 };
