@@ -1,0 +1,11 @@
+.defaultBtn {
+  width: 138px;
+  height: 39px;
+  border-radius: 16px;
+  border: none;
+  background-color: #aca0eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}

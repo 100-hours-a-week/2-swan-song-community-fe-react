@@ -1,14 +1,8 @@
-.inputBox {
+.inputBoxImage {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 15px;
-}
-
-.imageContainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
+  gap: 10px;
 }
 
 .inputBoxImage label {
@@ -22,6 +16,10 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.fileInput {
+  display: none;
 }
 
 .imagePlaceholder {

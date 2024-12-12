@@ -1,0 +1,8 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  width: 60%;
+  max-width: 592px;
+}

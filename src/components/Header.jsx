@@ -5,10 +5,11 @@ import shevlonLeft from '../assets/shevlon_left.svg';
 import userDefaultProfile from '../assets/user_default_profile.svg';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext.jsx';
+import styles from './Header.module.css';
 
 export default function Header({ backUrl, containProfileDropdown }) {
   const { profileImage, updateAuthState } = useAuth();
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false); // 메뉴 열림/닫힘 상태
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Header({ backUrl, containProfileDropdown }) {
 
       if (response.status === 204) {
         Cookies.remove('session_id');
-        updateAuthState(false, userDefaultProfile); // 로그아웃 시 상태 초기화
+        updateAuthState(false, userDefaultProfile);
         navigate('/login');
       }
     } catch (error) {
@@ -62,33 +63,39 @@ export default function Header({ backUrl, containProfileDropdown }) {
   };
 
   return (
-    <header className="global-navbar">
-      <div className="global-navbar-content">
+    <header className={styles.globalNavbar}>
+      <div className={styles.globalNavbarContent}>
         {backUrl && (
-          <Link to={backUrl}>
-            <img className="back" src={shevlonLeft} alt="뒤로가기" />
-          </Link>
+          <div className={styles.back}>
+            <Link to={backUrl}>
+              <img
+                className={styles.backImg}
+                src={shevlonLeft}
+                alt="뒤로가기"
+              />
+            </Link>
+          </div>
         )}
-        <h1>아무 말 대잔치</h1>
+        <h1 className={styles.headerTitle}>아무 말 대잔치</h1>
         {containProfileDropdown && (
-          <div className="profile-dropdown">
+          <div className={styles.profileDropdown}>
             <img
               id="profileDropDownToggle"
-              className="profile-image"
+              className={styles.profileImage}
               src={profileImage}
               alt="프로필 이미지"
               onClick={toggleProfileMenu}
             />
             {isProfileMenuOpen && (
-              <ul className="profile-menu">
-                <li>
+              <ul className={styles.profileMenu}>
+                <li className={styles.profileMenuItem}>
                   <a href="./views/user-info-modify.html">회원정보수정</a>
                 </li>
-                <li>
+                <li className={styles.profileMenuItem}>
                   <a href="./views/user-password-modify.html">비밀번호수정</a>
                 </li>
-                <li>
-                  <button onClick={logoutUser}>로그아웃</button>
+                <li className={styles.profileMenuItem}>
+                  <a onClick={logoutUser}>로그아웃</a>
                 </li>
               </ul>
             )}

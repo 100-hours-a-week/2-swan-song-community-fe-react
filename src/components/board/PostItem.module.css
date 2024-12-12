@@ -1,0 +1,50 @@
+.postItem {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0px 6px 4px #00000010;
+  background-color: #ffffff;
+}
+
+.postSummary {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  margin: 20px 20px 0px 20px;
+  padding-bottom: 20px;
+}
+
+.upperInfo .postTitle {
+  height: 31px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.downInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #00000095;
+}
+
+.downInfo .postReactions {
+  display: flex;
+}
+
+.downInfo .postReaction {
+  margin-right: 5px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  margin: 0px 20px 20px 20px;
+}
+
+.profileImage {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: #000000 0.5px solid;
+  margin-right: 10px;
+}

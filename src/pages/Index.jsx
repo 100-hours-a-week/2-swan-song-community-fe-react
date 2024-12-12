@@ -1,17 +1,22 @@
-import userDefaultProfile from '../assets/user_default_profile.svg';
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { usePagingId } from '../contexts/PagingIdContext.jsx';
-import '../stylesheets/pages/index.css';
+import React, { useEffect, useState, useRef } from 'react';
+import BoardHeader from '../components/board/BoardHeader.jsx';
+import BoardAction from '../components/board/BoardAction.jsx';
+import PostList from '../components/board/PostList.jsx';
+import { API_BASE_URL } from '../constants/api';
+import { usePagingId } from '../contexts/PagingIdContext';
+import styles from './Index.module.css';
 
 export default function Index() {
-  const [posts, setPosts] = useState([]);
-  const { size, lastId, hasNext, setLastId, setHasNext } = usePagingId;
-  const navigate = useNavigate();
+  const { size, lastId, hasNext, posts, setLastId, setHasNext, setPosts } =
+    usePagingId();
+  const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
+  const observerRef = useRef(null); // Intersection Observer를 위한 ref
+  const triggerRef = useRef(null); // 트리거 요소를 위한 ref
 
-  // 게시글 데이터를 가져오는 함수
   const fetchPosts = async () => {
+    if (!hasNext || isFetching) return; // 더 가져올 데이터가 없거나 로딩 중이면 종료
+
+    setIsFetching(true); // 로딩 시작
     try {
       const params = new URLSearchParams();
       if (size) params.append('size', size);
@@ -20,93 +25,58 @@ export default function Index() {
       const url = `${API_BASE_URL}/posts${params.toString() ? '?' + params.toString() : ''}`;
       const response = await fetch(url, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
 
       const data = await response.json();
       if (data.code === 2000) {
-        setPosts(prevPosts => [...prevPosts, ...data.data.content]);
+        setPosts(prev => [...prev, ...data.data.content]);
         setHasNext(data.data.hasNext);
         setLastId(data.data.lastId);
       }
     } catch (error) {
       console.error('게시글 로딩 중 오류 발생:', error);
-    }
-  };
-
-  // 스크롤 이벤트 핸들러
-  const handleScroll = () => {
-    if (
-      hasNext &&
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
-    ) {
-      fetchPosts();
+    } finally {
+      setIsFetching(false); // 로딩 종료
     }
   };
 
   useEffect(() => {
-    fetchPosts(); // 초기 게시글 로드
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll); // 클린업
-  }, []);
+    const observerCallback = entries => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !isFetching) {
+        fetchPosts(); // 트리거 요소가 보이고, 사용자가 스크롤한 경우만 호출
+      }
+    };
+
+    observerRef.current = new IntersectionObserver(observerCallback, {
+      root: null, // viewport
+      rootMargin: '0px',
+      threshold: 1.0, // 트리거 요소가 완전히 보일 때 호출
+    });
+
+    if (triggerRef.current) {
+      observerRef.current.observe(triggerRef.current); // 트리거 요소 관찰 시작
+    }
+
+    return () => {
+      if (observerRef.current && triggerRef.current) {
+        observerRef.current.unobserve(triggerRef.current); // 클린업
+      }
+    };
+  }, [isFetching, hasNext]);
 
   return (
-    <div className="board">
-      <div className="board-header">
-        <div>안녕하세요,</div>
-        <div>
-          아무 말 대잔치<span className="text-bold"> 게시판</span>입니다.
-        </div>
-      </div>
-      <div className="board-action">
-        <button className="btn-submit" onClick={() => navigate('/post-upload')}>
-          게시글 작성
-        </button>
-      </div>
-      <div className="post-list">
-        {posts.map(post => (
-          <div
-            className="post-item"
-            key={post.postId}
-            onClick={() => navigate(`/post-detail/${post.postId}`)}
-          >
-            <div className="post-summary">
-              <div className="upper-info">
-                <div className="post-title">{post.title}</div>
-              </div>
-              <div className="down-info">
-                <div className="post-reactions">
-                  <span className="post-reaction">
-                    좋아요 <span>{post.likeCount}</span>
-                  </span>
-                  <span className="post-reaction">
-                    댓글 <span>{post.commentCount}</span>
-                  </span>
-                  <span className="post-reaction">
-                    조회수 <span>{post.viewCount}</span>
-                  </span>
-                </div>
-                <div className="post-date">{post.createdDateTime}</div>
-              </div>
-            </div>
-            <div className="author-info">
-              <img
-                className="profile-image"
-                src={
-                  post.profileImageUrl
-                    ? `${IMAGE_BASE_URL}/${post.profileImageUrl}`
-                    : userDefaultProfile
-                }
-                alt="프로필 이미지"
-              />
-              <div className="author-name">{post.authorName}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className={styles.board}>
+      <BoardHeader />
+      <BoardAction />
+      <PostList posts={posts} />
+      <div
+        ref={triggerRef}
+        style={{ height: '50px', backgroundColor: 'transparent' }}
+      ></div>
+      {isFetching && <div>Loading...</div>}
     </div>
   );
 }
