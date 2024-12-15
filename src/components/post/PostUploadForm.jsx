@@ -22,8 +22,8 @@ const PostUploadForm = () => {
   const validateInputs = () => {
     const isTitleFilled = title.trim() !== '' && title.length <= 26;
     const isContentFilled = content.trim() !== '';
-    console.log(isTitleFilled , title.trim())
-    console.log(isContentFilled, content.trim())
+    console.log(isTitleFilled, title.trim());
+    console.log(isContentFilled, content.trim());
     setIsValid(isTitleFilled && isContentFilled);
   };
 
@@ -128,7 +128,7 @@ const PostUploadForm = () => {
             textArea: styles.inputBoxTextarea,
           }}
         />
-        { !isValid && <HelperText error={"* 제목과 내용을 입력해 주세요."} /> }
+        {!isValid && <HelperText error={'* 제목과 내용을 입력해 주세요.'} />}
         <FileInput
           label="이미지"
           name="postImage"
