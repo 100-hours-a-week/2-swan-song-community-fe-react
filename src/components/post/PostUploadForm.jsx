@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { usePagingId } from '../../contexts/PagingIdContext';
+import { usePostContext } from '../../contexts/PostContext.jsx';
 
 import InputField from '../ui/InputField';
 import FileInput from '../ui/FileInput';
@@ -10,7 +10,7 @@ import { API_BASE_URL } from '../../constants/api';
 import HelperText from '../ui/HelperText';
 
 const PostUploadForm = () => {
-  const { posts, setPosts } = usePagingId();
+  const { posts, setPosts } = usePostContext();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');

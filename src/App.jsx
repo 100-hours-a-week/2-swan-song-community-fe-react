@@ -6,7 +6,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.jsx';
-import { PagingIdProvider } from './contexts/PagingIdContext.jsx';
+import { PostProvider } from './contexts/PostContext.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Header from './components/Header.jsx';
 import Login from './pages/Login.jsx';
@@ -18,7 +18,7 @@ import PostDetail from './pages/PostDetail.jsx';
 function App() {
   return (
     <Router>
-      <PagingIdProvider>
+      <PostProvider>
         <AuthProvider>
           <ConditionalHeader />
           <Routes>
@@ -50,7 +50,7 @@ function App() {
             />
           </Routes>
         </AuthProvider>
-      </PagingIdProvider>
+      </PostProvider>
     </Router>
   );
 }

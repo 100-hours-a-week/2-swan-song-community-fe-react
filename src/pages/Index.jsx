@@ -3,12 +3,12 @@ import BoardHeader from '../components/board/BoardHeader.jsx';
 import BoardAction from '../components/board/BoardAction.jsx';
 import PostList from '../components/board/PostList.jsx';
 import { API_BASE_URL } from '../constants/api';
-import { usePagingId } from '../contexts/PagingIdContext';
+import { usePostContext } from '../contexts/PostContext.jsx';
 import styles from './Index.module.css';
 
 export default function Index() {
   const { size, lastId, hasNext, posts, setLastId, setHasNext, setPosts } =
-    usePagingId();
+    usePostContext();
   const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
   const observerRef = useRef(null); // Intersection Observer를 위한 ref
   const triggerRef = useRef(null); // 트리거 요소를 위한 ref
