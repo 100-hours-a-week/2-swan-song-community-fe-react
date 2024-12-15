@@ -7,6 +7,7 @@ const Button = ({
   onClick,
   className,
   type = 'button',
+  children,
 }) => {
   return (
     <button
@@ -16,6 +17,7 @@ const Button = ({
       onClick={onClick}
     >
       {label}
+      {children}
     </button>
   );
 };
