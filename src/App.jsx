@@ -13,6 +13,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Index from './pages/Index.jsx';
 import PostUpload from './pages/PostUpload.jsx';
+import PostDetail from './pages/PostDetail.jsx';
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <PostUpload />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/post-detail/:postId"
+              element={
+                <ProtectedRoute>
+                  <PostDetail />
                 </ProtectedRoute>
               }
             />
