@@ -103,7 +103,13 @@
   height: 77px;
   border-radius: 15px;
   font-weight: bold;
+  font-size: small;
   margin: 5px;
+  color: #000000;
+}
+
+.postLikedActive {
+  background-color: #e5b3b3 !important;
 }
 
 .commentForm {
@@ -174,30 +180,48 @@
 }
 
 .modalDeleteContent h4 {
-  font-size: 24px;
+  font-size: medium;
   font-weight: bold;
 }
 
 .modalDeleteContent p {
-  font-size: 16px;
+  font-size: medium;
   margin-top: 10px;
 }
 
 .cancel {
-  background-color: #6c757d;
+  background-color: #000000;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
   margin-right: 10px;
+  font-size: small;
 }
 
 .confirm {
-  background-color: #d9534f;
+  background-color: #7f6aed;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
+  font-size: small;
+}
+
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.hidden {
+  display: none;
 }
