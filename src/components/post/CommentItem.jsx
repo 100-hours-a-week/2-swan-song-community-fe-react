@@ -27,7 +27,7 @@ const CommentItem = ({ comment, userId, onEdit, onDelete }) => {
         <div className={styles.commentRightInfo}>
           <Button
             label="수정"
-            onClick={() => onEdit(comment.commentId, comment.content)}
+            onClick={() => onEdit(comment.commentId)}
             className={styles.commentEdit}
           />
           <Button
