@@ -53,6 +53,8 @@ export default function Login() {
           : userDefaultProfile;
         updateAuthState(true, profileUrl);
         navigate('/');
+      } else {
+        alert('로그인에 실패했습니다.');
       }
     } catch (error) {
       console.error('로그인 중 오류:', error);
