@@ -35,13 +35,13 @@ const PostItem = ({ post }) => {
         <img
           className={styles.profileImage}
           src={
-            post.profileImageUrl
-              ? `${IMAGE_BASE_URL}/${post.profileImageUrl}`
+            post.author.profileImageUrl
+              ? `${IMAGE_BASE_URL}/${post.author.profileImageUrl}`
               : userDefaultProfile
           }
           alt="프로필 이미지"
         />
-        <div className={styles.authorName}>{post.authorName}</div>
+        <div className={styles.authorName}>{post.author.name}</div>
       </div>
     </div>
   );

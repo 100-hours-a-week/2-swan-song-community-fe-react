@@ -384,14 +384,14 @@ const PostDetail = () => {
         ))}
       </div>
       {state.isModalOpen && (
-          <Modal
-              isOpen={state.isModalOpen}
-              onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
-              onConfirm={handleDeleteConfirm}
-              message={state.targetMessage}
-          >
-            <p>삭제한 내용은 복구할 수 없습니다.</p>
-          </Modal>
+        <Modal
+          isOpen={state.isModalOpen}
+          onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
+          onConfirm={handleDeleteConfirm}
+          message={state.targetMessage}
+        >
+          <p>삭제한 내용은 복구할 수 없습니다.</p>
+        </Modal>
       )}
     </div>
   );
