@@ -271,13 +271,6 @@ const PostDetail = () => {
     }
   };
 
-  const handleModalBackgroundClick = event => {
-    // 이벤트가 백그라운드에만 발생했는지 확인
-    if (event.target === event.currentTarget) {
-      dispatch({ type: 'CLOSE_MODAL' });
-    }
-  };
-
   if (!state.post) {
     return <div>로딩 중...</div>;
   }

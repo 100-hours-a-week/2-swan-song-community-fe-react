@@ -163,7 +163,6 @@ const UserInfoModify = () => {
       const data = await response.json();
 
       if (data.code === 2000) {
-        alert('회원정보가 수정되었습니다.');
         adjustUpdatingUser(data.data);
         navigate('/');
       } else {
@@ -181,7 +180,7 @@ const UserInfoModify = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/users/me`, {
+      const response = await fetch(`${API_BASE_URL}/auth/withdrawal`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -251,7 +250,7 @@ const UserInfoModify = () => {
           error={nicknameMessage}
           errorClassName={nicknameStatus === 'success'}
         />
-        <div className={styles.buttonBox}>
+        <div>
           <SubmitButton
             label={'수정하기'}
             className={styles.modifyButton}
