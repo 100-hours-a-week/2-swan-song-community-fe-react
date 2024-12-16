@@ -103,12 +103,12 @@ export default function Header({ backUrl, containProfileDropdown }) {
                     </Link>
                   </li>
                   <li className={styles.profileMenuItem}>
-                    <a
-                      href="./views/user-password-modify.html"
+                    <Link
+                      to="/user-password-modify"
                       onClick={toggleProfileMenu}
                     >
                       비밀번호수정
-                    </a>
+                    </Link>
                   </li>
                   <li className={styles.profileMenuItem}>
                     <a
