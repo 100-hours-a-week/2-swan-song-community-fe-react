@@ -62,6 +62,10 @@ export default function Header({ backUrl, containProfileDropdown }) {
     setIsProfileMenuOpen(prevState => !prevState);
   };
 
+  function handleMenuBackground() {
+    setIsProfileMenuOpen(false);
+  }
+
   return (
     <header className={styles.globalNavbar}>
       <div className={styles.globalNavbarContent}>
@@ -87,17 +91,37 @@ export default function Header({ backUrl, containProfileDropdown }) {
               onClick={toggleProfileMenu}
             />
             {isProfileMenuOpen && (
-              <ul className={styles.profileMenu}>
-                <li className={styles.profileMenuItem}>
-                  <a href="./views/user-info-modify.html">회원정보수정</a>
-                </li>
-                <li className={styles.profileMenuItem}>
-                  <a href="./views/user-password-modify.html">비밀번호수정</a>
-                </li>
-                <li className={styles.profileMenuItem}>
-                  <a onClick={logoutUser}>로그아웃</a>
-                </li>
-              </ul>
+              <>
+                <div
+                  className={styles.menuBackground}
+                  onClick={handleMenuBackground}
+                ></div>
+                <ul className={styles.profileMenu}>
+                  <li className={styles.profileMenuItem}>
+                    <Link to="/user-info-modify" onClick={toggleProfileMenu}>
+                      회원정보수정
+                    </Link>
+                  </li>
+                  <li className={styles.profileMenuItem}>
+                    <a
+                      href="./views/user-password-modify.html"
+                      onClick={toggleProfileMenu}
+                    >
+                      비밀번호수정
+                    </a>
+                  </li>
+                  <li className={styles.profileMenuItem}>
+                    <a
+                      onClick={() => {
+                        toggleProfileMenu();
+                        logoutUser();
+                      }}
+                    >
+                      로그아웃
+                    </a>
+                  </li>
+                </ul>
+              </>
             )}
           </div>
         )}
