@@ -8,12 +8,19 @@
 }
 
 .headerStr {
+  font-size: 32px;
   margin-top: 50px;
   margin-bottom: 67px;
+  font-weight: bold;
+  line-height: 38.19px;
 }
 
 .userInfoModifyForm {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+
 }
 
 .imagePlaceholderLabel {
@@ -25,8 +32,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-top: 5px;
-  margin-bottom: 45px;
 }
 
 .imagePlaceholderWrapper {
