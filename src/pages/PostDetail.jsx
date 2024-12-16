@@ -7,6 +7,7 @@ import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로�
 import styles from './PostDetail.module.css';
 import classNames from 'classNames';
 import { usePostContext } from '../contexts/PostContext.jsx';
+import Modal from '../components/ui/Modal';
 
 // 초기 상태 정의
 const initialState = {
@@ -141,6 +142,15 @@ const PostDetail = () => {
       setCommentInputButtonText('댓글 등록');
     }
   }, [editCommentId, commentInputButtonText]);
+
+  const handleDeleteConfirm = () => {
+    if (state.targetType === 'comment') {
+      handleDeleteComment(state.selectedTargetId);
+    } else if (state.targetType === 'post') {
+      handleDeletePost();
+    }
+    dispatch({ type: 'CLOSE_MODAL' });
+  };
 
   const handleDeletePost = async () => {
     try {
@@ -374,35 +384,14 @@ const PostDetail = () => {
         ))}
       </div>
       {state.isModalOpen && (
-        <div
-          className={styles.modalBackground}
-          onClick={handleModalBackgroundClick} // 백그라운드 클릭 이벤트
+        <Modal
+          isOpen={state.isModalOpen}
+          onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
+          onConfirm={handleDeleteConfirm}
+          message={state.targetMessage}
         >
-          <div className={styles.modalDelete}>
-            <div className={styles.modalDeleteContent}>
-              <h4>{state.targetMessage}</h4>
-              <p>삭제한 내용은 복구할 수 없습니다.</p>
-              <div>
-                <Button
-                  label="취소"
-                  onClick={() => dispatch({ type: 'CLOSE_MODAL' })}
-                  className={styles.cancel}
-                />
-                <Button
-                  label="확인"
-                  onClick={() => {
-                    if (state.targetType === 'comment') {
-                      handleDeleteComment(state.selectedTargetId);
-                    } else if (state.targetType === 'post') {
-                      handleDeletePost();
-                    }
-                  }}
-                  className={styles.confirm}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+          <p>삭제한 내용은 복구할 수 없습니다.</p>
+        </Modal>
       )}
     </div>
   );

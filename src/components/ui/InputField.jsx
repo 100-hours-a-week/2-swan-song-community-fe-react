@@ -14,6 +14,7 @@ const InputField = ({
   error,
   errorClassName,
   className,
+  readOnly,
 }) => {
   return (
     <div
@@ -52,10 +53,12 @@ const InputField = ({
           className={classNames(
             styles.inputBoxInput,
             className?.inputBoxInput ? className.inputBoxInput : undefined,
+            readOnly ? styles.readOnly : undefined,
           )}
           value={value}
           onChange={onChange}
           placeholder={placeholder}
+          readOnly={readOnly}
         />
       )}
       {error && <HelperText errorClassName={errorClassName} error={error} />}

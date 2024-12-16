@@ -8,6 +8,7 @@ const Button = ({
   className,
   type = 'button',
   children,
+  ...props
 }) => {
   return (
     <button
@@ -15,6 +16,7 @@ const Button = ({
       type={type}
       disabled={!isValid}
       onClick={onClick}
+      {...props}
     >
       {label}
       {children}
