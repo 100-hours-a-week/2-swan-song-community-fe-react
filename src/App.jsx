@@ -16,6 +16,7 @@ import PostUpload from './pages/PostUpload.jsx';
 import PostDetail from './pages/PostDetail.jsx';
 import PostModify from './pages/PostModify.jsx';
 import UserInfoModify from './pages/UserInfoModify.jsx';
+import UserPasswordModify from './pages/UserPasswordModify.jsx';
 
 function App() {
   return (
@@ -63,6 +64,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UserInfoModify />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/user-password-modify"
+              element={
+                <ProtectedRoute>
+                  <UserPasswordModify />
                 </ProtectedRoute>
               }
             />
