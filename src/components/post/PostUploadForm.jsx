@@ -19,14 +19,6 @@ const PostUploadForm = () => {
 
   const navigate = useNavigate();
 
-  const validateInputs = () => {
-    const isTitleFilled = title.trim() !== '' && title.length <= 26;
-    const isContentFilled = content.trim() !== '';
-    console.log(isTitleFilled, title.trim());
-    console.log(isContentFilled, content.trim());
-    setIsValid(isTitleFilled && isContentFilled);
-  };
-
   const handleTitleChange = event => {
     setTitle(event.target.value.slice(0, 26));
   };
