@@ -7,10 +7,7 @@ import { usePostContext } from '../contexts/PostContext.jsx';
 import styles from './Index.module.css';
 
 export default function Index() {
-  const { posts, setPosts } = usePostContext();
-  const size = 5; // 한 번에 가져올 게시글 수
-  const [lastId, setLastId] = useState(null); // 마지막 ID (페이징)
-  const [hasNext, setHasNext] = useState(true); // 다음 데이터 여부
+  const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } = usePostContext();
   const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
   const observerRef = useRef(null); // Intersection Observer를 위한 ref
   const triggerRef = useRef(null); // 트리거 요소를 위한 ref

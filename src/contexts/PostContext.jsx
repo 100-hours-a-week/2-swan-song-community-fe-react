@@ -4,6 +4,9 @@ const PostContext = createContext();
 
 export const PostProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
+  const [size, setSize] = useState(null); // 페이지 크기 (페이징)
+  const [lastId, setLastId] = useState(null); // 마지막 ID (페이징)
+  const [hasNext, setHasNext] = useState(true); // 다음 데이터 여부
 
   const adjustUpdatingUser = user => {
     const updatedPosts = posts.map(post => {
@@ -25,6 +28,7 @@ export const PostProvider = ({ children }) => {
       value={{
         posts,
         setPosts,
+        size, lastId, setLastId, hasNext, setHasNext,
         removePost,
         adjustUpdatingUser,
       }}
