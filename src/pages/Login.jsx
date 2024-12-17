@@ -47,7 +47,6 @@ export default function Login() {
       const result = await response.json();
 
       if (result.code === 2000) {
-        sessionStorage.setItem('user_id', result.data.userId);
         const profileUrl = result.data.profileImageUrl
           ? `${IMAGE_BASE_URL}${result.data.profileImageUrl}`
           : userDefaultProfile;

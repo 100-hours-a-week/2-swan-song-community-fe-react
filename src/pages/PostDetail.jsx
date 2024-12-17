@@ -7,6 +7,7 @@ import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로�
 import styles from './PostDetail.module.css';
 import classNames from 'classnames';
 import { usePostContext } from '../contexts/PostContext.jsx';
+import { useAuth } from '../contexts/AuthContext.jsx';
 import Modal from '../components/ui/Modal';
 
 // 초기 상태 정의
@@ -98,12 +99,12 @@ const PostDetail = () => {
   const postId = parseInt(postIdStr);
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const userId = parseInt(sessionStorage.getItem('user_id'));
   const commentRef = useRef(null);
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentInputButtonText, setCommentInputButtonText] =
     useState('댓글 등록');
   const { removePost } = usePostContext();
+  const { userId } = useAuth();
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -294,7 +295,7 @@ const PostDetail = () => {
             <span className={styles.date}>{state.post.createdDateTime}</span>
           </div>
           {userId === state.post.author.id && (
-            <div className={styles.rightInfo}>
+            <div>
               <Button
                 label="수정"
                 onClick={() => navigate(`/post-modify/${postId}`)}

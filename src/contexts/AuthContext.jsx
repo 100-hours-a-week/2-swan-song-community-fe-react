@@ -8,6 +8,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileImage, setProfileImage] = useState(userDefaultProfile);
+  const [userId, setUserId] = useState(null);
   const [isCheckingSession, setIsCheckingSession] = useState(true); // 로딩 상태
   const navigate = useNavigate();
 
@@ -59,8 +60,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const fetchUserId = async () => {
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    if (data.code === 2000) {
+      setUserId(parseInt(data.data.userId));
+    }
+  }
+
   useEffect(() => {
     checkSession();
+    fetchUserId();
   }, []);
 
   if (isCheckingSession) {
@@ -68,7 +82,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, profileImage, updateAuthState }}>
+    <AuthContext.Provider value={{ isLoggedIn, profileImage, updateAuthState, userId }}>
       {children}
     </AuthContext.Provider>
   );
