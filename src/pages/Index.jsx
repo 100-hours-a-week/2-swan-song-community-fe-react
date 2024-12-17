@@ -16,7 +16,8 @@ import { usePostContext } from '../contexts/PostContext.jsx';
 import styles from './Index.module.css';
 
 export default function Index() {
-  const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } = usePostContext();
+  const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } =
+    usePostContext();
   const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
   const observerRef = useRef(null); // Intersection Observer를 위한 ref
   const triggerRef = useRef(null); // 트리거 요소를 위한 ref

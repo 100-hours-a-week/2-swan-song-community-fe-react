@@ -28,7 +28,6 @@ const InputField = ({
       className={classNames(
         styles.inputBox,
         className?.inputBox && className.inputBox,
-
       )}
     >
       <label
@@ -69,7 +68,9 @@ const InputField = ({
           readOnly={readOnly}
         />
       )}
-      {helperMessage && <HelperText isError={isError} helperMessage={helperMessage} />}
+      {helperMessage && (
+        <HelperText isError={isError} helperMessage={helperMessage} />
+      )}
     </div>
   );
 };

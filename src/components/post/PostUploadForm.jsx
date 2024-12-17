@@ -128,7 +128,9 @@ const PostUploadForm = () => {
             textArea: styles.inputBoxTextarea,
           }}
         />
-        {!isValid && <HelperText helperMessage={'* 제목과 내용을 입력해 주세요.'} />}
+        {!isValid && (
+          <HelperText helperMessage={'* 제목과 내용을 입력해 주세요.'} />
+        )}
         <FileInput
           label="이미지"
           name="postImage"

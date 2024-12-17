@@ -157,7 +157,9 @@ const PostModify = () => {
             textArea: styles.inputBoxTextarea,
           }}
         />
-        {!isValid && <HelperText helperMessage="* 제목과 내용을 입력해 주세요." />}
+        {!isValid && (
+          <HelperText helperMessage="* 제목과 내용을 입력해 주세요." />
+        )}
         <div className={styles.imageContainer}>
           {existingImage && (
             <div className={styles.imagePlaceholder}>

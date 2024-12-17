@@ -29,7 +29,11 @@ export const PostProvider = ({ children }) => {
       value={{
         posts,
         setPosts,
-        size, lastId, setLastId, hasNext, setHasNext,
+        size,
+        lastId,
+        setLastId,
+        hasNext,
+        setHasNext,
         removePost,
         adjustUpdatingUser,
       }}

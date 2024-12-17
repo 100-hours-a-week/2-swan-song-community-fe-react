@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation
+  useLocation,
 } from 'react-router-dom';
 
 // 전역 상태 및 컨텍스트

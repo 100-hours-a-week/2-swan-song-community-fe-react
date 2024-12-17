@@ -10,7 +10,6 @@ import { API_BASE_URL } from '../constants/api.js';
 // 프로젝트 내부 에셋 (이미지 파일)
 import userDefaultProfile from '../assets/user_default_profile.svg';
 
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -78,7 +77,7 @@ export const AuthProvider = ({ children }) => {
     if (data.code === 2000) {
       setUserId(parseInt(data.data.userId));
     }
-  }
+  };
 
   useEffect(() => {
     checkSession();
@@ -90,7 +89,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, profileImage, updateAuthState, userId }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, profileImage, updateAuthState, userId }}
+    >
       {children}
     </AuthContext.Provider>
   );
