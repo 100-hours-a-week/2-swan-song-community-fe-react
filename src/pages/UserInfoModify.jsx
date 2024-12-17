@@ -247,8 +247,8 @@ const UserInfoModify = () => {
           onChange={event => setNickname(event.target.value)}
           placeholder="닉네임을 입력하세요"
           initialvalue={nickname}
-          error={nicknameMessage}
-          errorClassName={nicknameStatus === 'success'}
+          helperMessage={nicknameMessage}
+          isError={nicknameStatus !== 'success'}
         />
         <div>
           <SubmitButton

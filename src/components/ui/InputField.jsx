@@ -11,8 +11,8 @@ const InputField = ({
   onChange,
   placeholder,
   isTextArea,
-  error,
-  errorClassName,
+  helperMessage,
+  isError,
   className,
   readOnly,
 }) => {
@@ -20,14 +20,15 @@ const InputField = ({
     <div
       className={classNames(
         styles.inputBox,
-        className?.inputBox ? className.inputBox : undefined,
+        className?.inputBox && className.inputBox,
+
       )}
     >
       <label
         htmlFor={name}
         className={classNames(
           styles.inputBoxLabel,
-          className?.inputBoxLabel ? className.inputBoxLabel : undefined,
+          className?.inputBoxLabel && className.inputBoxLabel,
         )}
       >
         {label}
@@ -38,7 +39,7 @@ const InputField = ({
           name={name}
           className={classNames(
             styles.textArea,
-            className?.textArea ? className.textArea : undefined,
+            className?.textArea && className.textArea,
           )}
           value={value}
           onChange={onChange}
@@ -52,8 +53,8 @@ const InputField = ({
           name={name}
           className={classNames(
             styles.inputBoxInput,
-            className?.inputBoxInput ? className.inputBoxInput : undefined,
-            readOnly ? styles.readOnly : undefined,
+            className?.inputBoxInput && className.inputBoxInput,
+            readOnly && styles.readOnly,
           )}
           value={value}
           onChange={onChange}
@@ -61,7 +62,7 @@ const InputField = ({
           readOnly={readOnly}
         />
       )}
-      {error && <HelperText errorClassName={errorClassName} error={error} />}
+      {helperMessage && <HelperText isError={isError} helperMessage={helperMessage} />}
     </div>
   );
 };

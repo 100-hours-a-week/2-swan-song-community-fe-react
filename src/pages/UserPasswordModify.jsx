@@ -86,8 +86,7 @@ const UserPasswordModify = () => {
           value={newPassword}
           onChange={handlePasswordChange}
           placeholder="새 비밀번호를 입력하세요"
-          error={newPasswordMessage}
-          errorClassName={newPasswordStatus === 'success'}
+          helperMessage={newPasswordMessage}
         />
         <InputField
           label="새 비밀번호 확인"
@@ -96,8 +95,7 @@ const UserPasswordModify = () => {
           value={passwordCheck}
           onChange={handlePasswordCheckChange}
           placeholder="새 비밀번호를 다시 입력하세요"
-          error={passwordCheckMessage}
-          errorClassName={passwordCheckStatus === 'success'}
+          helperMessage={passwordCheckMessage}
         />
         <div>
           <SubmitButton

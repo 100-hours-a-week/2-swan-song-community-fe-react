@@ -5,7 +5,7 @@ import CommentItem from '../components/post/CommentItem';
 import Button from '../components/ui/Button';
 import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로필 기본 이미지
 import styles from './PostDetail.module.css';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { usePostContext } from '../contexts/PostContext.jsx';
 import Modal from '../components/ui/Modal';
 

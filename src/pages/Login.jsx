@@ -82,8 +82,7 @@ export default function Login() {
         />
         {!isValid && (
           <HelperText
-            errorClassName={styles.loginErrorHelper}
-            error={'* 아이디나 비밀번호가 형식에 맞지 않습니다.'}
+            helperMessage={'* 아이디나 비밀번호가 형식에 맞지 않습니다.'}
           />
         )}
         <div className={styles.btnBox}>

@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import styles from './HelperText.module.css';
 
-export default function helperText({ errorClassName, error }) {
+export default function helperText({ isError = true, helperMessage }) {
   return (
     <span
       className={classNames(
-        !errorClassName ? styles.helperText : styles.success,
+        isError ? styles.error : styles.success,
       )}
     >
-      {error}
+      {helperMessage}
     </span>
   );
 }
