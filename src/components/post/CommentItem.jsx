@@ -21,7 +21,7 @@ const CommentItem = ({ comment, userId, onEdit, onDelete }) => {
           <span className={styles.author}>{comment.author.name}</span>
           <span className={styles.date}>{comment.createdDateTime}</span>
         </div>
-        <p>{comment.content}</p>
+        <p className={styles.commentContent}>{comment.content}</p>
       </div>
       {userId === comment.author.id && (
         <div className={styles.commentRightInfo}>
