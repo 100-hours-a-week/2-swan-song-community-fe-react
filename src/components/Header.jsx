@@ -1,10 +1,21 @@
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
-import { useEffect, useState } from 'react';
+// React 및 React Router 라이브러리
+import React, { useEffect, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+
+// 외부 라이브러리
 import Cookies from 'js-cookie';
+
+// 상수 및 환경 변수
+import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import shevlonLeft from '../assets/shevlon_left.svg';
 import userDefaultProfile from '../assets/user_default_profile.svg';
-import { useNavigate, Link } from 'react-router-dom';
+
+// 전역 상태 및 컨텍스트
 import { useAuth } from '../contexts/AuthContext.jsx';
+
+// 스타일 파일 (CSS Modules)
 import styles from './Header.module.css';
 
 export default function Header({ backUrl, containProfileDropdown }) {

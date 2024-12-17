@@ -1,14 +1,29 @@
+// React 및 React Hooks
 import React, { useEffect, useReducer, useRef, useState } from 'react';
+
+// React Router 라이브러리
 import { useNavigate, useParams } from 'react-router-dom';
+
+// 상수 및 환경 변수
 import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
-import CommentItem from '../components/post/CommentItem';
-import Button from '../components/ui/Button';
-import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로필 기본 이미지
-import styles from './PostDetail.module.css';
+
+// 외부 라이브러리
 import classNames from 'classnames';
+
+// 전역 상태 및 컨텍스트
 import { usePostContext } from '../contexts/PostContext.jsx';
 import { useAuth } from '../contexts/AuthContext.jsx';
+
+// 프로젝트 내부 컴포넌트
+import CommentItem from '../components/post/CommentItem';
+import Button from '../components/ui/Button';
 import Modal from '../components/ui/Modal';
+
+// 프로젝트 내부 에셋 (이미지 파일)
+import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로필 기본 이미지
+
+// 스타일 파일 (CSS Modules)
+import styles from './PostDetail.module.css';
 
 // 초기 상태 정의
 const initialState = {

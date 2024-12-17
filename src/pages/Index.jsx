@@ -1,9 +1,18 @@
+// React 및 React Hooks
 import React, { useEffect, useState, useRef } from 'react';
+
+// 프로젝트 내부 컴포넌트
 import BoardHeader from '../components/board/BoardHeader';
 import BoardAction from '../components/board/BoardAction.jsx';
 import PostList from '../components/board/PostList.jsx';
+
+// 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api';
+
+// 전역 상태 및 컨텍스트
 import { usePostContext } from '../contexts/PostContext.jsx';
+
+// 스타일 파일 (CSS Modules)
 import styles from './Index.module.css';
 
 export default function Index() {

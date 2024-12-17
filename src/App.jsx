@@ -1,14 +1,23 @@
+// 글로벌 스타일 파일
 import './App.css';
+
+// React Router 라이브러리
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useLocation,
+  useLocation
 } from 'react-router-dom';
+
+// 전역 상태 및 컨텍스트
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { PostProvider } from './contexts/PostContext.jsx';
+
+// 프로젝트 내부 컴포넌트
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Header from './components/Header.jsx';
+
+// 프로젝트 페이지 컴포넌트
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Index from './pages/Index.jsx';

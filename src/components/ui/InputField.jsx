@@ -1,7 +1,14 @@
+// React 라이브러리
 import React from 'react';
+
+// 외부 라이브러리
 import classNames from 'classnames';
-import styles from './InputField.module.css';
+
+// 프로젝트 내부 컴포넌트
 import HelperText from './HelperText';
+
+// 스타일 파일 (CSS Modules)
+import styles from './InputField.module.css';
 
 const InputField = ({
   label,

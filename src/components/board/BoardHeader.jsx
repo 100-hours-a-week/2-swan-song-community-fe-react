@@ -1,4 +1,7 @@
+// React 라이브러리
 import React from 'react';
+
+// CSS Modules 스타일 파일
 import styles from './BoardHeader.module.css';
 
 const BoardHeader = () => {

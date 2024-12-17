@@ -1,8 +1,15 @@
+// React 및 React Router 라이브러리
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './PostItem.module.css';
+
+// 프로젝트 내부 이미지 및 에셋
 import userDefaultProfile from '../../assets/user_default_profile.svg';
+
+// 상수 및 환경변수
 import { IMAGE_BASE_URL } from '../../constants/api';
+
+// CSS Modules 스타일 파일
+import styles from './PostItem.module.css';
 
 const PostItem = ({ post }) => {
   const navigate = useNavigate();

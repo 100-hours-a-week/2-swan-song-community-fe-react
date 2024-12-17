@@ -1,7 +1,15 @@
-import { API_BASE_URL } from '../constants/api.js';
-import { useNavigate } from 'react-router-dom';
+// React 및 React Hooks
 import { createContext, useContext, useState, useEffect } from 'react';
+
+// React Router 라이브러리
+import { useNavigate } from 'react-router-dom';
+
+// 상수 및 환경 변수
+import { API_BASE_URL } from '../constants/api.js';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import userDefaultProfile from '../assets/user_default_profile.svg';
+
 
 const AuthContext = createContext();
 

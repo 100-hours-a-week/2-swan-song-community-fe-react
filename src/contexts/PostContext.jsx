@@ -1,3 +1,4 @@
+// React 및 React Hooks
 import { createContext, useContext, useState } from 'react';
 
 const PostContext = createContext();
