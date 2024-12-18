@@ -1,6 +1,13 @@
-import { API_BASE_URL } from '../constants/api.js';
-import { useNavigate } from 'react-router-dom';
+// React 및 React Hooks
 import { createContext, useContext, useState, useEffect } from 'react';
+
+// React Router 라이브러리
+import { useNavigate } from 'react-router-dom';
+
+// 상수 및 환경 변수
+import { API_BASE_URL } from '../constants/api.js';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import userDefaultProfile from '../assets/user_default_profile.svg';
 
 const AuthContext = createContext();
@@ -8,6 +15,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileImage, setProfileImage] = useState(userDefaultProfile);
+  const [userId, setUserId] = useState(null);
   const [isCheckingSession, setIsCheckingSession] = useState(true); // 로딩 상태
   const navigate = useNavigate();
 
@@ -59,8 +67,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const fetchUserId = async () => {
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    if (data.code === 2000) {
+      setUserId(parseInt(data.data.userId));
+    }
+  };
+
   useEffect(() => {
     checkSession();
+    fetchUserId();
   }, []);
 
   if (isCheckingSession) {
@@ -68,7 +89,9 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, profileImage, updateAuthState }}>
+    <AuthContext.Provider
+      value={{ isLoggedIn, profileImage, updateAuthState, userId }}
+    >
       {children}
     </AuthContext.Provider>
   );

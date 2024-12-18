@@ -1,11 +1,22 @@
+// React 및 React Hooks
 import { useState } from 'react';
+
+// React Router 라이브러리
 import { useNavigate, Link } from 'react-router-dom';
+
+// 외부 라이브러리
 import classNames from 'classnames';
+
+// 프로젝트 내부 컴포넌트
 import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
 import ProfileImageInput from '../components/ui/ProfileImageInput';
-import styles from './Register.module.css';
+
+// 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api';
+
+// 스타일 파일 (CSS Modules)
+import styles from './Register.module.css';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -175,7 +186,7 @@ export default function Register() {
           value={formData.email}
           onChange={handleEmailChange}
           placeholder="이메일을 입력하세요"
-          error={errors.email}
+          helperMessage={errors.email}
         />
         <InputField
           label="비밀번호 *"
@@ -184,7 +195,7 @@ export default function Register() {
           value={formData.password}
           onChange={handlePasswordChange}
           placeholder="비밀번호를 입력하세요"
-          error={errors.password}
+          helperMessage={errors.password}
         />
         <InputField
           label="비밀번호 확인 *"
@@ -193,7 +204,7 @@ export default function Register() {
           value={formData.passwordChecker}
           onChange={handlePasswordCheckerChange}
           placeholder="비밀번호를 한 번 더 입력하세요"
-          error={errors.passwordChecker}
+          helperMessage={errors.passwordChecker}
         />
         <InputField
           label="닉네임 *"
@@ -201,8 +212,8 @@ export default function Register() {
           value={formData.nickname}
           onChange={handleNicknameChange}
           placeholder="닉네임을 입력하세요"
-          error={nicknameMessage}
-          errorClassName={nicknameStatus === 'success'}
+          helperMessage={nicknameMessage}
+          isError={nicknameStatus !== 'success'}
         />
         <div className={styles.btnBox}>
           <SubmitButton

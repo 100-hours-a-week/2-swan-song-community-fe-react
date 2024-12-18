@@ -1,6 +1,11 @@
+// React 라이브러리
 import React, { useState } from 'react';
-import styles from './ProfileImageInput.module.css';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import addFileImage from '../../assets/add_round_light.svg';
+
+// 스타일 파일 (CSS Modules)
+import styles from './ProfileImageInput.module.css';
 
 const FileInput = ({ label, name, onChange, preview }) => {
   const [imagePreview, setImagePreview] = useState(preview);

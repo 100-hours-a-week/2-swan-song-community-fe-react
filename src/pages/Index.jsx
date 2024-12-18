@@ -1,13 +1,22 @@
+// React 및 React Hooks
 import React, { useEffect, useState, useRef } from 'react';
-import BoardHeader from '../components/board/BoardHeader.jsx';
+
+// 프로젝트 내부 컴포넌트
+import BoardHeader from '../components/board/BoardHeader';
 import BoardAction from '../components/board/BoardAction.jsx';
 import PostList from '../components/board/PostList.jsx';
+
+// 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api';
+
+// 전역 상태 및 컨텍스트
 import { usePostContext } from '../contexts/PostContext.jsx';
+
+// 스타일 파일 (CSS Modules)
 import styles from './Index.module.css';
 
 export default function Index() {
-  const { size, lastId, hasNext, posts, setLastId, setHasNext, setPosts } =
+  const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } =
     usePostContext();
   const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
   const observerRef = useRef(null); // Intersection Observer를 위한 ref
@@ -16,7 +25,7 @@ export default function Index() {
   const fetchPosts = async () => {
     if (!hasNext || isFetching) return; // 더 가져올 데이터가 없거나 로딩 중이면 종료
 
-    setIsFetching(true); // 로딩 시작
+    setIsFetching(true); // 로딩 시작 (중복 호출 방지)
     try {
       const params = new URLSearchParams();
       if (size) params.append('size', size);
@@ -65,7 +74,7 @@ export default function Index() {
         observerRef.current.unobserve(triggerRef.current); // 클린업
       }
     };
-  }, [isFetching, hasNext]);
+  }, [isFetching, hasNext]); // 최신 상태를 반영하기 위해 isFetching, hasNext 를 의존성 배열에 추가
 
   return (
     <div className={styles.board}>

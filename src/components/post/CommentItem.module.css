@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+.commentContent {
+  white-space: pre-wrap;
+}
+
 .metadata {
   display: flex;
   justify-content: space-between;

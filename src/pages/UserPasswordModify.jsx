@@ -1,9 +1,18 @@
+// React 및 React Hooks
 import React, { useState } from 'react';
+
+// React Router 라이브러리
 import { useNavigate } from 'react-router-dom';
+
+// 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api.js';
-import styles from './UserPasswordModify.module.css';
+
+// 프로젝트 내부 컴포넌트
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
+
+// 스타일 파일 (CSS Modules)
+import styles from './UserPasswordModify.module.css';
 
 const UserPasswordModify = () => {
   const navigate = useNavigate();
@@ -86,8 +95,7 @@ const UserPasswordModify = () => {
           value={newPassword}
           onChange={handlePasswordChange}
           placeholder="새 비밀번호를 입력하세요"
-          error={newPasswordMessage}
-          errorClassName={newPasswordStatus === 'success'}
+          helperMessage={newPasswordMessage}
         />
         <InputField
           label="새 비밀번호 확인"
@@ -96,8 +104,7 @@ const UserPasswordModify = () => {
           value={passwordCheck}
           onChange={handlePasswordCheckChange}
           placeholder="새 비밀번호를 다시 입력하세요"
-          error={passwordCheckMessage}
-          errorClassName={passwordCheckStatus === 'success'}
+          helperMessage={passwordCheckMessage}
         />
         <div>
           <SubmitButton

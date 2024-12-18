@@ -1,13 +1,21 @@
+// React 및 React Router 라이브러리
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+// 전역 상태 및 컨텍스트
 import { usePostContext } from '../../contexts/PostContext.jsx';
 
+// 상수 및 환경 변수
+import { API_BASE_URL } from '../../constants/api';
+
+// 프로젝트 내부 컴포넌트
 import InputField from '../ui/InputField';
 import FileInput from '../ui/FileInput';
 import SubmitButton from '../ui/SubmitButton';
-import styles from './PostUploadForm.module.css';
-import { API_BASE_URL } from '../../constants/api';
 import HelperText from '../ui/HelperText';
+
+// 스타일 파일 (CSS Modules)
+import styles from './PostUploadForm.module.css';
 
 const PostUploadForm = () => {
   const { posts, setPosts } = usePostContext();
@@ -120,7 +128,9 @@ const PostUploadForm = () => {
             textArea: styles.inputBoxTextarea,
           }}
         />
-        {!isValid && <HelperText error={'* 제목과 내용을 입력해 주세요.'} />}
+        {!isValid && (
+          <HelperText helperMessage={'* 제목과 내용을 입력해 주세요.'} />
+        )}
         <FileInput
           label="이미지"
           name="postImage"

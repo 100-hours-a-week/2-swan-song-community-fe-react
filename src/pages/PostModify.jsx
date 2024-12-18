@@ -1,12 +1,23 @@
+// React 및 React Hooks
 import React, { useEffect, useState } from 'react';
+
+// React Router 라이브러리
 import { useNavigate, useParams } from 'react-router-dom';
+
+// 상수 및 환경 변수
 import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+
+// 프로젝트 내부 컴포넌트
 import InputField from '../components/ui/InputField';
 import FileInput from '../components/ui/FileInput';
 import SubmitButton from '../components/ui/SubmitButton';
-import styles from './PostModify.module.css';
 import HelperText from '../components/ui/HelperText';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import closeIcon from '../assets/close_square_light.svg';
+
+// 스타일 파일 (CSS Modules)
+import styles from './PostModify.module.css';
 
 const PostModify = () => {
   const { postId } = useParams();
@@ -146,7 +157,9 @@ const PostModify = () => {
             textArea: styles.inputBoxTextarea,
           }}
         />
-        {!isValid && <HelperText error="* 제목과 내용을 입력해 주세요." />}
+        {!isValid && (
+          <HelperText helperMessage="* 제목과 내용을 입력해 주세요." />
+        )}
         <div className={styles.imageContainer}>
           {existingImage && (
             <div className={styles.imagePlaceholder}>

@@ -1,14 +1,29 @@
+// React 및 React Hooks
 import React, { useEffect, useState, useReducer, useRef } from 'react';
-import { usePostContext } from '../contexts/PostContext.jsx';
+
+// React Router 라이브러리
 import { useNavigate } from 'react-router-dom';
+
+// 외부 라이브러리
+import Cookies from 'js-cookie';
+
+// 전역 상태 및 컨텍스트
+import { usePostContext } from '../contexts/PostContext.jsx';
+
+// 상수 및 환경 변수
+import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+
+// 프로젝트 내부 에셋 (이미지 파일)
 import closeIcon from '../assets/close_square_light.svg';
 import userDefaultProfile from '../assets/user_default_profile.svg';
-import Cookies from 'js-cookie';
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
-import styles from './UserInfoModify.module.css';
+
+// 프로젝트 내부 컴포넌트
 import Button from '../components/ui/Button.jsx';
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
+
+// 스타일 파일 (CSS Modules)
+import styles from './UserInfoModify.module.css';
 
 const initialState = {
   profileImageUrl: null,
@@ -247,8 +262,8 @@ const UserInfoModify = () => {
           onChange={event => setNickname(event.target.value)}
           placeholder="닉네임을 입력하세요"
           initialvalue={nickname}
-          error={nicknameMessage}
-          errorClassName={nicknameStatus === 'success'}
+          helperMessage={nicknameMessage}
+          isError={nicknameStatus !== 'success'}
         />
         <div>
           <SubmitButton

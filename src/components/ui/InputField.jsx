@@ -1,7 +1,14 @@
+// React 라이브러리
 import React from 'react';
+
+// 외부 라이브러리
 import classNames from 'classnames';
-import styles from './InputField.module.css';
+
+// 프로젝트 내부 컴포넌트
 import HelperText from './HelperText';
+
+// 스타일 파일 (CSS Modules)
+import styles from './InputField.module.css';
 
 const InputField = ({
   label,
@@ -11,8 +18,8 @@ const InputField = ({
   onChange,
   placeholder,
   isTextArea,
-  error,
-  errorClassName,
+  helperMessage,
+  isError,
   className,
   readOnly,
 }) => {
@@ -20,14 +27,14 @@ const InputField = ({
     <div
       className={classNames(
         styles.inputBox,
-        className?.inputBox ? className.inputBox : undefined,
+        className?.inputBox && className.inputBox,
       )}
     >
       <label
         htmlFor={name}
         className={classNames(
           styles.inputBoxLabel,
-          className?.inputBoxLabel ? className.inputBoxLabel : undefined,
+          className?.inputBoxLabel && className.inputBoxLabel,
         )}
       >
         {label}
@@ -38,7 +45,7 @@ const InputField = ({
           name={name}
           className={classNames(
             styles.textArea,
-            className?.textArea ? className.textArea : undefined,
+            className?.textArea && className.textArea,
           )}
           value={value}
           onChange={onChange}
@@ -52,8 +59,8 @@ const InputField = ({
           name={name}
           className={classNames(
             styles.inputBoxInput,
-            className?.inputBoxInput ? className.inputBoxInput : undefined,
-            readOnly ? styles.readOnly : undefined,
+            className?.inputBoxInput && className.inputBoxInput,
+            readOnly && styles.readOnly,
           )}
           value={value}
           onChange={onChange}
@@ -61,7 +68,9 @@ const InputField = ({
           readOnly={readOnly}
         />
       )}
-      {error && <HelperText errorClassName={errorClassName} error={error} />}
+      {helperMessage && (
+        <HelperText isError={isError} helperMessage={helperMessage} />
+      )}
     </div>
   );
 };

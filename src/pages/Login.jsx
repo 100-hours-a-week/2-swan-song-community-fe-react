@@ -1,13 +1,28 @@
+// React 및 React Hooks
 import { useState } from 'react';
+
+// React Router 라이브러리
 import { useNavigate, Link } from 'react-router-dom';
+
+// 외부 라이브러리
 import classNames from 'classnames';
+
+// 프로젝트 내부 컴포넌트
 import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
-import { useAuth } from '../contexts/AuthContext';
-import userDefaultProfile from '../assets/user_default_profile.svg';
-import styles from './Login.module.css';
 import HelperText from '../components/ui/HelperText';
+
+// 상수 및 환경 변수
+import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+
+// 전역 상태 및 컨텍스트
+import { useAuth } from '../contexts/AuthContext';
+
+// 프로젝트 내부 에셋 (이미지 파일)
+import userDefaultProfile from '../assets/user_default_profile.svg';
+
+// 스타일 파일 (CSS Modules)
+import styles from './Login.module.css';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -47,7 +62,6 @@ export default function Login() {
       const result = await response.json();
 
       if (result.code === 2000) {
-        sessionStorage.setItem('user_id', result.data.userId);
         const profileUrl = result.data.profileImageUrl
           ? `${IMAGE_BASE_URL}${result.data.profileImageUrl}`
           : userDefaultProfile;
@@ -82,8 +96,7 @@ export default function Login() {
         />
         {!isValid && (
           <HelperText
-            errorClassName={styles.loginErrorHelper}
-            error={'* 아이디나 비밀번호가 형식에 맞지 않습니다.'}
+            helperMessage={'* 아이디나 비밀번호가 형식에 맞지 않습니다.'}
           />
         )}
         <div className={styles.btnBox}>

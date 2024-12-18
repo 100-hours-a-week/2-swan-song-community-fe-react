@@ -1,12 +1,13 @@
+// React 및 React Hooks
 import { createContext, useContext, useState } from 'react';
 
 const PostContext = createContext();
 
 export const PostProvider = ({ children }) => {
-  const [size] = useState(5); // 한 번에 가져올 게시글 수
+  const [posts, setPosts] = useState([]);
+  const [size, setSize] = useState(null); // 페이지 크기 (페이징)
   const [lastId, setLastId] = useState(null); // 마지막 ID (페이징)
   const [hasNext, setHasNext] = useState(true); // 다음 데이터 여부
-  const [posts, setPosts] = useState([]);
 
   const adjustUpdatingUser = user => {
     const updatedPosts = posts.map(post => {
@@ -26,13 +27,13 @@ export const PostProvider = ({ children }) => {
   return (
     <PostContext.Provider
       value={{
+        posts,
+        setPosts,
         size,
         lastId,
-        hasNext,
-        posts,
         setLastId,
+        hasNext,
         setHasNext,
-        setPosts,
         removePost,
         adjustUpdatingUser,
       }}
