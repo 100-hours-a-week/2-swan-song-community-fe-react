@@ -12,7 +12,6 @@ import classNames from 'classnames';
 
 // 전역 상태 및 컨텍스트
 import { usePostContext } from '../contexts/PostContext.jsx';
-import { useAuth } from '../contexts/AuthContext.jsx';
 
 // 프로젝트 내부 컴포넌트
 import CommentItem from '../components/post/CommentItem';
@@ -69,6 +68,7 @@ const reducer = (state, action) => {
         post: {
           ...state.post,
           comments: [action.payload, ...state.post.comments],
+          commentCount: state.post.commentCount + 1,
         },
       };
     case 'EDIT_COMMENT':
@@ -91,6 +91,7 @@ const reducer = (state, action) => {
           comments: state.post.comments.filter(
             comment => comment.commentId !== action.payload,
           ),
+          commentCount: state.post.commentCount - 1,
         },
       };
     case 'TOGGLE_LIKE':
@@ -118,12 +119,25 @@ const PostDetail = () => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentInputButtonText, setCommentInputButtonText] =
     useState('댓글 등록');
-  const { removePost } = usePostContext();
-  const { userId } = useAuth();
+  const { removePost, updatePost } = usePostContext();
+  const userId = useRef(null);
 
   useEffect(() => {
+    const fetchUserId = async () => {
+      const response = await fetch(`${API_BASE_URL}/users/me`, {
+        method: 'GET',
+        credentials: 'include',
+      });
+
+      const data = await response.json();
+      if (data.code === 2000) {
+        return parseInt(data.data.userId);
+      }
+    };
+
     const fetchPostDetails = async () => {
       try {
+        userId.current = await fetchUserId();
         console.log('게시글 정보를 불러오는 중입니다...');
         const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
           method: 'GET',
@@ -144,7 +158,6 @@ const PostDetail = () => {
         console.error('게시글 정보를 불러오는 중 오류가 발생했습니다:', error);
       }
     };
-
     fetchPostDetails();
   }, []);
 
@@ -158,6 +171,12 @@ const PostDetail = () => {
       setCommentInputButtonText('댓글 등록');
     }
   }, [editCommentId, commentInputButtonText]);
+
+  useEffect(() => {
+    if (state.post) {
+      updatePost(state.post);
+    }
+  }, [state.post]);
 
   const handleDeleteConfirm = () => {
     if (state.targetType === 'comment') {
@@ -186,15 +205,20 @@ const PostDetail = () => {
   const handleDeleteComment = async commentId => {
     try {
       console.log(`댓글 ID ${commentId} 삭제 요청 중...`);
-      await fetch(`${API_BASE_URL}/posts/comments`, {
+      const response = await fetch(`${API_BASE_URL}/posts/comments`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
         body: JSON.stringify({ commentId }),
       });
-      console.log(`댓글 ID ${commentId}이 성공적으로 삭제되었습니다.`);
-      dispatch({ type: 'DELETE_COMMENT', payload: commentId });
-      dispatch({ type: 'CLOSE_MODAL' });
+
+      if (response.status === 204) {
+        console.log(`댓글 ID ${commentId}이 성공적으로 삭제되었습니다.`);
+        dispatch({ type: 'DELETE_COMMENT', payload: commentId });
+        dispatch({ type: 'CLOSE_MODAL' });
+      } else {
+        console.error(`댓글 ID ${commentId} 삭제에 실패했습니다.`);
+      }
     } catch (error) {
       console.error('댓글 삭제 중 오류가 발생했습니다:', error);
     }
@@ -245,7 +269,7 @@ const PostDetail = () => {
       const result = await response.json();
 
       if (result.code === 2000) {
-        console.log('댓글이 성공적으로 등록되었습니다.');
+        console.log('댓글이 성공적으로 수정되었습니다.');
         dispatch({ type: 'EDIT_COMMENT', payload: result.data.comment });
         commentRef.current.value = '';
       } else {
@@ -309,7 +333,7 @@ const PostDetail = () => {
             <span className={styles.author}>{state.post.author.name}</span>
             <span className={styles.date}>{state.post.createdDateTime}</span>
           </div>
-          {userId === state.post.author.id && (
+          {userId.current === state.post.author.id && (
             <div>
               <Button
                 label="수정"
@@ -381,7 +405,7 @@ const PostDetail = () => {
           <CommentItem
             key={comment.commentId}
             comment={comment}
-            userId={userId}
+            userId={userId.current}
             onEdit={id => setEditCommentId(id) && commentRef.current.focus()}
             onDelete={id =>
               dispatch({

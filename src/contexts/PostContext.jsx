@@ -20,8 +20,26 @@ export const PostProvider = ({ children }) => {
     setPosts(updatedPosts);
   };
 
+  const updatePost = updatedPost => {
+    const updatedPosts = posts.map(post => {
+      if (post.postId === updatedPost.postId) {
+        return updatedPost;
+      } else {
+        return post;
+      }
+    });
+    setPosts(updatedPosts);
+  };
+
   const removePost = postId => {
     setPosts(prev => prev.filter(post => post.postId !== postId));
+  };
+
+  const resetPost = () => {
+    setPosts([]);
+    setSize(null);
+    setLastId(null);
+    setHasNext(true);
   };
 
   return (
@@ -36,6 +54,8 @@ export const PostProvider = ({ children }) => {
         setHasNext,
         removePost,
         adjustUpdatingUser,
+        updatePost,
+        resetPost,
       }}
     >
       {children}
