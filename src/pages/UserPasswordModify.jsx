@@ -11,6 +11,12 @@ import { API_BASE_URL } from '../constants/api.js';
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
 
+// 프로젝트 내부 util 함수
+import {
+  validatePassword,
+  validatePasswordCheck,
+} from '../utils/authValidator.js';
+
 // 스타일 파일 (CSS Modules)
 import styles from './UserPasswordModify.module.css';
 
@@ -22,25 +28,6 @@ const UserPasswordModify = () => {
   const [passwordCheckMessage, setPasswordCheckMessage] = useState('');
   const [newPasswordStatus, setNewPasswordStatus] = useState('');
   const [passwordCheckStatus, setPasswordCheckStatus] = useState('');
-
-  const validatePassword = password => {
-    const isValidLength = password.length >= 8 && password.length <= 20;
-    const hasNumber = /[0-9]/.test(password);
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
-    return isValidLength &&
-      hasNumber &&
-      hasUpperCase &&
-      hasLowerCase &&
-      hasSpecialChar
-      ? ''
-      : '* 비밀번호는 8자 이상 20자 이하이며, 특수문자, 영어, 숫자를 각각 하나 이상 포함해야 합니다.';
-  };
-
-  const validatePasswordCheck = (password, passwordChecker) =>
-    password === passwordChecker ? '' : '* 비밀번호가 일치하지 않습니다.';
 
   const handlePasswordChange = e => {
     const password = e.target.value;

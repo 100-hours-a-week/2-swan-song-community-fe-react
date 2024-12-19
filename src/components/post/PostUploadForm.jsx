@@ -1,5 +1,5 @@
 // React 및 React Router 라이브러리
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // 전역 상태 및 컨텍스트
@@ -58,8 +58,7 @@ const PostUploadForm = () => {
         throw new Error(errorData.message || '업로드 실패');
       }
 
-      const responseJson = await response.json();
-      return responseJson;
+      return await response.json();
     } catch (error) {
       console.error('업로드 중 오류 발생:', error.message);
       throw error;
@@ -88,6 +87,7 @@ const PostUploadForm = () => {
       }
     } catch (error) {
       alert('게시글 업로드 중 오류가 발생했습니다.');
+      console.error('게시글 업로드 중 오류:', error);
     }
   };
 

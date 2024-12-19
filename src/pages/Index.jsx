@@ -38,8 +38,8 @@ export default function Index() {
         credentials: 'include',
       });
 
-      const data = await response.json();
-      if (data.code === 2000) {
+      if (response.ok) {
+        const data = await response.json();
         setPosts(prev => [...prev, ...data.data.content]);
         setHasNext(data.data.hasNext);
         setLastId(data.data.lastId);

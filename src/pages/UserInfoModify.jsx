@@ -21,6 +21,7 @@ import userDefaultProfile from '../assets/user_default_profile.svg';
 import Button from '../components/ui/Button.jsx';
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
+import Modal from '../components/ui/Modal.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './UserInfoModify.module.css';
@@ -64,6 +65,7 @@ const UserInfoModify = () => {
   const [nicknameMessage, setNicknameMessage] = useState('');
   const navigate = useNavigate();
   const originalNickname = useRef('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const sessionId = Cookies.get('session_id');
@@ -189,11 +191,6 @@ const UserInfoModify = () => {
   };
 
   const handleWithdrawal = async () => {
-    const confirmWithdrawal = window.confirm('정말로 탈퇴하시겠습니까?');
-    if (!confirmWithdrawal) {
-      return;
-    }
-
     try {
       const response = await fetch(`${API_BASE_URL}/auth/withdrawal`, {
         method: 'DELETE',
@@ -276,13 +273,19 @@ const UserInfoModify = () => {
           >
             수정하기
           </SubmitButton>
-          <SubmitButton
+          <Button
             label={'회원탈퇴'}
             className={styles.withdrawalButton}
-            onClick={handleWithdrawal}
-          ></SubmitButton>
+            onClick={() => setIsModalOpen(true)}
+          ></Button>
         </div>
       </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={handleWithdrawal}
+        message={'정말로 탈퇴하시겠습니까?'}
+      />
     </section>
   );
 };

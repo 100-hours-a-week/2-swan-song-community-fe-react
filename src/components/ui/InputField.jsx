@@ -1,5 +1,5 @@
 // React 라이브러리
-import React from 'react';
+import React, { useState } from 'react';
 
 // 외부 라이브러리
 import classNames from 'classnames';
@@ -23,6 +23,12 @@ const InputField = ({
   className,
   readOnly,
 }) => {
+  const [isTouched, setIsTouched] = useState(false);
+
+  const handleFocus = () => {
+    setIsTouched(true);
+  };
+
   return (
     <div
       className={classNames(
@@ -64,11 +70,12 @@ const InputField = ({
           )}
           value={value}
           onChange={onChange}
+          onFocus={handleFocus}
           placeholder={placeholder}
           readOnly={readOnly}
         />
       )}
-      {helperMessage && (
+      {isTouched && helperMessage && (
         <HelperText isError={isError} helperMessage={helperMessage} />
       )}
     </div>

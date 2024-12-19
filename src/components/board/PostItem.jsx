@@ -29,10 +29,10 @@ const PostItem = ({ post }) => {
               좋아요 <span>{post.likeCount}</span>
             </span>
             <span className={styles.postReaction}>
-              댓글 <span>{post.commentCount}</span>
+              조회수 <span>{post.viewCount}</span>
             </span>
             <span className={styles.postReaction}>
-              조회수 <span>{post.viewCount}</span>
+              댓글 <span>{post.commentCount}</span>
             </span>
           </div>
           <div className={styles.postDate}>{post.createdDateTime}</div>
