@@ -22,6 +22,7 @@ import Button from '../components/ui/Button.jsx';
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
 import Modal from '../components/ui/Modal.jsx';
+import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './UserInfoModify.module.css';
@@ -290,4 +291,4 @@ const UserInfoModify = () => {
   );
 };
 
-export default UserInfoModify;
+export default WithAuthenticated(UserInfoModify);

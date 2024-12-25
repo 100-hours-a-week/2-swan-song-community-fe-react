@@ -14,7 +14,6 @@ import { AuthProvider } from './contexts/AuthContext.jsx';
 import { PostProvider } from './contexts/PostContext.jsx';
 
 // 프로젝트 내부 컴포넌트
-import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Header from './components/Header.jsx';
 
 // 프로젝트 페이지 컴포넌트
@@ -36,53 +35,14 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Index />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/post-upload"
-              element={
-                <ProtectedRoute>
-                  <PostUpload />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/post-detail/:postId"
-              element={
-                <ProtectedRoute>
-                  <PostDetail />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/post-modify/:postId"
-              element={
-                <ProtectedRoute>
-                  <PostModify />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/user-info-modify"
-              element={
-                <ProtectedRoute>
-                  <UserInfoModify />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/" element={<Index />} />
+            <Route path="/post-upload" element={<PostUpload />} />
+            <Route path="/post-detail/:postId" element={<PostDetail />} />
+            <Route path="/post-modify/:postId" element={<PostModify />} />
+            <Route path="/user-info-modify" element={<UserInfoModify />} />
             <Route
               path="/user-password-modify"
-              element={
-                <ProtectedRoute>
-                  <UserPasswordModify />
-                </ProtectedRoute>
-              }
+              element={<UserPasswordModify />}
             />
           </Routes>
         </AuthProvider>

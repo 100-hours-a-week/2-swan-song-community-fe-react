@@ -17,6 +17,7 @@ import { usePostContext } from '../contexts/PostContext.jsx';
 import CommentItem from '../components/post/CommentItem';
 import Button from '../components/ui/Button';
 import Modal from '../components/ui/Modal';
+import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로필 기본 이미지
@@ -430,4 +431,4 @@ const PostDetail = () => {
   );
 };
 
-export default PostDetail;
+export default WithAuthenticated(PostDetail);

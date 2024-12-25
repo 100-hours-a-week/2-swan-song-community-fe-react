@@ -5,6 +5,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import BoardHeader from '../components/board/BoardHeader';
 import BoardAction from '../components/board/BoardAction.jsx';
 import PostList from '../components/board/PostList.jsx';
+import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api';
@@ -15,7 +16,7 @@ import { usePostContext } from '../contexts/PostContext.jsx';
 // 스타일 파일 (CSS Modules)
 import styles from './Index.module.css';
 
-export default function Index() {
+function Index() {
   const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } =
     usePostContext();
   const [isFetching, setIsFetching] = useState(false); // API 호출 중인지 확인
@@ -89,3 +90,5 @@ export default function Index() {
     </div>
   );
 }
+
+export default WithAuthenticated(Index);

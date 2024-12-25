@@ -10,6 +10,7 @@ import { API_BASE_URL } from '../constants/api.js';
 // 프로젝트 내부 컴포넌트
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
+import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 프로젝트 내부 util 함수
 import {
@@ -113,4 +114,4 @@ const UserPasswordModify = () => {
   );
 };
 
-export default UserPasswordModify;
+export default WithAuthenticated(UserPasswordModify);
