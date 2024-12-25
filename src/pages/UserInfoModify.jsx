@@ -29,7 +29,7 @@ import styles from './UserInfoModify.module.css';
 
 const initialState = {
   profileImageUrl: null,
-  isChanged: false,
+  isImageChanged: false,
 };
 
 const reducer = (state, action) => {
@@ -38,19 +38,19 @@ const reducer = (state, action) => {
       return {
         ...state,
         profileImageUrl: action.payload,
-        isChanged: false,
+        isImageChanged: false,
       };
     case 'SET_DEFAULT_PROFILE':
       return {
         ...state,
         profileImageUrl: userDefaultProfile,
-        isChanged: true,
+        isImageChanged: true,
       };
     case 'SET_PROFILE_IMAGE':
       return {
         ...state,
         profileImageUrl: action.payload,
-        isChanged: true,
+        isImageChanged: true,
       };
   }
 };
@@ -62,7 +62,7 @@ const UserInfoModify = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
-  const [nicknameStatus, setNicknameStatus] = useState('');
+  const [nicknameStatus, setNicknameStatus] = useState(false);
   const [nicknameMessage, setNicknameMessage] = useState('');
   const navigate = useNavigate();
   const originalNickname = useRef('');
@@ -107,18 +107,18 @@ const UserInfoModify = () => {
 
     if (trimmedNickname === originalNickname.current) {
       // Ref와 비교
-      setNicknameStatus('success');
+      setNicknameStatus(true);
       setNicknameMessage('');
       return;
     }
 
     if (!trimmedNickname) {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임을 입력하세요.');
       return;
     }
     if (trimmedNickname.length > 10) {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임은 10자리 이하여야 합니다.');
       return;
     }
@@ -130,14 +130,14 @@ const UserInfoModify = () => {
       const data = await response.json();
 
       if (data.data.isAvailable) {
-        setNicknameStatus('success');
+        setNicknameStatus(true);
         setNicknameMessage('사용 가능한 닉네임입니다.');
       } else {
-        setNicknameStatus('error');
+        setNicknameStatus(false);
         setNicknameMessage('* 닉네임이 중복되었습니다.');
       }
     } catch {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임 중복 확인 중 오류가 발생했습니다.');
     }
   };
@@ -165,9 +165,9 @@ const UserInfoModify = () => {
     formData.append('nickname', nickname);
     formData.append(
       'isProfileImageRemoved',
-      hasAlreadyProfileImage.current && state.isChanged,
+      hasAlreadyProfileImage.current && state.isImageChanged,
     );
-    if (state.isChanged) {
+    if (state.isImageChanged) {
       formData.append('profileImage', profileImageInput.current.files[0]);
     }
 
@@ -261,15 +261,16 @@ const UserInfoModify = () => {
           placeholder="닉네임을 입력하세요"
           initialvalue={nickname}
           helperMessage={nicknameMessage}
-          isError={nicknameStatus !== 'success'}
+          isError={!nicknameStatus}
         />
         <div>
           <SubmitButton
             label={'수정하기'}
             className={styles.modifyButton}
             onClick={handleModify}
-            disabled={
-              !nickname || nicknameStatus !== 'success' || !state.isChanged
+            isValid={
+              (nicknameStatus && originalNickname.current !== nickname) ||
+              state.isImageChanged
             }
           >
             수정하기
