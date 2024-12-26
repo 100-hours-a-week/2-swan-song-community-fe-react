@@ -19,6 +19,9 @@ import Button from '../components/ui/Button';
 import Modal from '../components/ui/Modal';
 import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
+// 커스텀 훅
+import useFetch from '../hooks/useFetch';
+
 // 프로젝트 내부 에셋 (이미지 파일)
 import defaultProfileImage from '../assets/user_default_profile.svg'; // 프로필 기본 이미지
 
@@ -113,71 +116,84 @@ const reducer = (state, action) => {
 
 const PostDetail = () => {
   const { postId: postIdStr } = useParams();
-  const postId = parseInt(postIdStr);
+  const postId = parseInt(postIdStr, 10);
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
   const commentRef = useRef(null);
   const [editCommentId, setEditCommentId] = useState(null);
-  const [commentInputButtonText, setCommentInputButtonText] =
-    useState('댓글 등록');
+  const [commentInputButtonText, setCommentInputButtonText] = useState('댓글 등록');
   const { removePost, updatePost } = usePostContext();
   const userId = useRef(null);
 
+  const { fetchData: fetchUserId, isFetching: isUserIdFetching } = useFetch();
+  const { fetchData: fetchPostDetails, isFetching: isPostDetailsFetching } = useFetch();
+
   useEffect(() => {
-    const fetchUserId = async () => {
-      const response = await fetch(`${API_BASE_URL}/users/me`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-
-      const data = await response.json();
-      if (data.code === 2000) {
-        return parseInt(data.data.userId);
-      }
-    };
-
-    const fetchPostDetails = async () => {
+    const initialize = async () => {
       try {
-        userId.current = await fetchUserId();
-        console.log('게시글 정보를 불러오는 중입니다...');
-        const response = await fetch(`${API_BASE_URL}/posts/${postId}`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-        });
-        const result = await response.json();
-
-        if (result.code === 2000) {
-          console.log('게시글 정보를 성공적으로 불러왔습니다.');
-          dispatch({ type: 'SET_POST', payload: result.data });
-        } else {
-          console.error(
-            `게시글 정보를 불러오는 데 실패했습니다: ${result.message}`,
+        fetchUserId(`${API_BASE_URL}/users/me`, true, {}, data =>
+        {
+          userId.current = data.data.userId;
+          fetchPostDetails(
+            `${API_BASE_URL}/posts/${postId}`,
+            true,
+            {},
+            result => dispatch({ type: 'SET_POST', payload: result.data })
           );
-        }
+        });
       } catch (error) {
-        console.error('게시글 정보를 불러오는 중 오류가 발생했습니다:', error);
+        console.error('초기 데이터 로딩 중 오류:', error);
       }
     };
-    fetchPostDetails();
-  }, []);
+    initialize();
+  }, [postId]);
 
   useEffect(() => {
     if (editCommentId) {
       commentRef.current.value = state.post.comments.find(
-        comment => comment.commentId === editCommentId,
+        comment => comment.commentId === editCommentId
       ).content;
       setCommentInputButtonText('댓글 수정');
     } else {
       setCommentInputButtonText('댓글 등록');
     }
-  }, [editCommentId, commentInputButtonText]);
+  }, [editCommentId]);
 
   useEffect(() => {
     if (state.post) {
       updatePost(state.post);
     }
   }, [state.post]);
+
+  const handleAddComment = async () => {
+    const newComment = commentRef.current.value.trim();
+    if (!newComment) {
+      alert('댓글 내용을 입력해주세요.');
+      return;
+    }
+    try {
+      const response = await fetch(`${API_BASE_URL}/posts/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ postId, content: newComment }),
+      });
+      const result = await response.json();
+
+      if (result.code === 2001) {
+        dispatch({ type: 'ADD_COMMENT', payload: result.data.comment });
+        commentRef.current.value = '';
+      } else {
+        console.error('댓글 등록 실패:', result.message);
+      }
+    } catch (error) {
+      console.error('댓글 등록 오류:', error);
+    }
+  };
+
+  if (!state.post || isUserIdFetching || isPostDetailsFetching) {
+    return <div>로딩 중...</div>;
+  }
 
   const handleDeleteConfirm = () => {
     if (state.targetType === 'comment') {
@@ -222,34 +238,6 @@ const PostDetail = () => {
       }
     } catch (error) {
       console.error('댓글 삭제 중 오류가 발생했습니다:', error);
-    }
-  };
-
-  const handleAddComment = async () => {
-    const newComment = commentRef.current.value.trim();
-    if (!newComment) {
-      alert('댓글 내용을 입력해주세요.');
-      return;
-    }
-    try {
-      console.log('댓글 등록 요청 중...');
-      const response = await fetch(`${API_BASE_URL}/posts/comments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ postId, content: newComment }),
-      });
-      const result = await response.json();
-
-      if (result.code === 2001) {
-        console.log('댓글이 성공적으로 등록되었습니다.');
-        dispatch({ type: 'ADD_COMMENT', payload: result.data.comment });
-        commentRef.current.value = '';
-      } else {
-        console.error(`댓글 등록에 실패했습니다: ${result.message}`);
-      }
-    } catch (error) {
-      console.error('댓글 등록 중 오류가 발생했습니다:', error);
     }
   };
 
