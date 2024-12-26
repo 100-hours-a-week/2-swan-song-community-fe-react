@@ -12,6 +12,7 @@ import InputField from '../components/ui/InputField';
 import FileInput from '../components/ui/FileInput';
 import SubmitButton from '../components/ui/SubmitButton';
 import HelperText from '../components/ui/HelperText';
+import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import closeIcon from '../assets/close_square_light.svg';
@@ -203,4 +204,4 @@ const PostModify = () => {
   );
 };
 
-export default PostModify;
+export default WithAuthenticated(PostModify);

@@ -40,7 +40,7 @@ export default function Register() {
     nickname: '',
   });
   const [nicknameMessage, setNicknameMessage] = useState('');
-  const [nicknameStatus, setNicknameStatus] = useState('');
+  const [nicknameStatus, setNicknameStatus] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
 
@@ -48,12 +48,12 @@ export default function Register() {
     const trimmedNickname = nickname.trim();
 
     if (!trimmedNickname) {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임을 입력하세요.');
       return;
     }
     if (trimmedNickname.length > 10) {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임은 10자리 이하여야 합니다.');
       return;
     }
@@ -65,14 +65,14 @@ export default function Register() {
       const data = await response.json();
 
       if (data.data.isAvailable) {
-        setNicknameStatus('success');
+        setNicknameStatus(true);
         setNicknameMessage('사용 가능한 닉네임입니다.');
       } else {
-        setNicknameStatus('error');
+        setNicknameStatus(false);
         setNicknameMessage('* 닉네임이 중복되었습니다.');
       }
     } catch {
-      setNicknameStatus('error');
+      setNicknameStatus(false);
       setNicknameMessage('* 닉네임 중복 확인 중 오류가 발생했습니다.');
     }
   };
@@ -119,10 +119,7 @@ export default function Register() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (
-      Object.values(errors).some(error => error) ||
-      nicknameStatus !== 'success'
-    ) {
+    if (Object.values(errors).some(error => error) || !nicknameStatus) {
       alert('모든 필드를 정확히 입력해주세요.');
       return;
     }
@@ -170,6 +167,7 @@ export default function Register() {
           value={formData.email}
           onChange={handleEmailChange}
           placeholder="이메일을 입력하세요"
+          isError={errors.email}
           helperMessage={errors.email}
         />
         <InputField
@@ -179,6 +177,7 @@ export default function Register() {
           value={formData.password}
           onChange={handlePasswordChange}
           placeholder="비밀번호를 입력하세요"
+          isError={errors.password}
           helperMessage={errors.password}
         />
         <InputField
@@ -188,6 +187,7 @@ export default function Register() {
           value={formData.passwordChecker}
           onChange={handlePasswordCheckerChange}
           placeholder="비밀번호를 한 번 더 입력하세요"
+          isError={errors.passwordChecker}
           helperMessage={errors.passwordChecker}
         />
         <InputField
@@ -197,7 +197,7 @@ export default function Register() {
           onChange={handleNicknameChange}
           placeholder="닉네임을 입력하세요"
           helperMessage={nicknameMessage}
-          isError={nicknameStatus !== 'success'}
+          isError={!nicknameStatus}
         />
         <div className={styles.btnBox}>
           <SubmitButton
@@ -205,7 +205,7 @@ export default function Register() {
               !Object.values(errors).some(error => error) &&
               formData.email &&
               formData.password &&
-              nicknameStatus === 'success'
+              nicknameStatus
             }
             label="회원가입"
             className={classNames(styles.btnSubmit, styles.registerBtn)}
