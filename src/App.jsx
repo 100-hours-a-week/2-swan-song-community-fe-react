@@ -21,7 +21,7 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Index from './pages/Index.jsx';
 import PostUpload from './pages/PostUpload.jsx';
-import PostDetail from './pages/PostDetail.jsx';
+import PostDetail from './pages/postdetail/PostDetail.jsx';
 import PostModify from './pages/PostModify.jsx';
 import UserInfoModify from './pages/UserInfoModify.jsx';
 import UserPasswordModify from './pages/UserPasswordModify.jsx';
