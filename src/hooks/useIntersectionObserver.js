@@ -7,7 +7,7 @@ function useIntersectionObserver(onIntersect, isFetching, options = {}) {
   useEffect(() => {
     if (!triggerRef.current) return;
 
-    const observerCallback = (entries) => {
+    const observerCallback = entries => {
       const [entry] = entries;
       if (entry.isIntersecting && !isFetching) {
         onIntersect();

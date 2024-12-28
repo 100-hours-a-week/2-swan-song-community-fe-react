@@ -1,5 +1,5 @@
 // React 및 React Hooks
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // React Router 라이브러리
 import { useNavigate } from 'react-router-dom';
@@ -29,13 +29,23 @@ const UserPasswordModify = () => {
   const [passwordCheckMessage, setPasswordCheckMessage] = useState('');
   const [newPasswordStatus, setNewPasswordStatus] = useState(false);
   const [passwordCheckStatus, setPasswordCheckStatus] = useState(false);
+  const [isPasswordCheckerTouching, setIsPasswordCheckerTouching] =
+    useState(false);
+
+  useEffect(() => {
+    if (isPasswordCheckerTouching) {
+      const errorMessage = validatePasswordCheck(newPassword, passwordCheck);
+      setPasswordCheckMessage(errorMessage);
+      setPasswordCheckStatus(errorMessage === '');
+    }
+  }, [newPassword, isPasswordCheckerTouching]);
 
   const handlePasswordChange = e => {
     const password = e.target.value;
     setNewPassword(password);
     const errorMessage = validatePassword(password);
     setNewPasswordMessage(errorMessage);
-    setNewPasswordStatus(!!errorMessage);
+    setNewPasswordStatus(errorMessage === '');
   };
 
   const handlePasswordCheckChange = e => {
@@ -43,7 +53,8 @@ const UserPasswordModify = () => {
     setPasswordCheck(passwordCheck);
     const errorMessage = validatePasswordCheck(newPassword, passwordCheck);
     setPasswordCheckMessage(errorMessage);
-    setPasswordCheckStatus(!!errorMessage);
+    setPasswordCheckStatus(errorMessage === '');
+    setIsPasswordCheckerTouching(true);
   };
 
   const handleModify = async e => {
@@ -83,7 +94,7 @@ const UserPasswordModify = () => {
           value={newPassword}
           onChange={handlePasswordChange}
           placeholder="새 비밀번호를 입력하세요"
-          isError={newPasswordStatus}
+          isError={!newPasswordStatus}
           helperMessage={newPasswordMessage}
         />
         <InputField
@@ -93,7 +104,7 @@ const UserPasswordModify = () => {
           value={passwordCheck}
           onChange={handlePasswordCheckChange}
           placeholder="새 비밀번호를 다시 입력하세요"
-          isError={passwordCheckStatus}
+          isError={!passwordCheckStatus}
           helperMessage={passwordCheckMessage}
         />
         <div>
@@ -101,12 +112,7 @@ const UserPasswordModify = () => {
             label={'수정하기'}
             className={styles.modifyButton}
             onClick={handleModify}
-            isValid={
-              newPassword &&
-              passwordCheck &&
-              newPasswordStatus &&
-              passwordCheckStatus
-            }
+            isValid={newPasswordStatus && passwordCheckStatus}
           >
             수정하기
           </SubmitButton>

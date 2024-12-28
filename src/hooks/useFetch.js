@@ -3,12 +3,12 @@ import { useState } from 'react';
 function useFetch() {
   const [isFetching, setIsFetching] = useState(false);
 
-  const fetchData = async (apiUrl, hasNext = true, params, onSuccess, onError) => {
+  const fetchData = async (apiUrl, hasNext = true, params = {}) => {
     if (!hasNext || isFetching) return;
     setIsFetching(true);
 
     const paramsWithoutNull = Object.fromEntries(
-      Object.entries(params).filter(([, value]) => value !== null)
+      Object.entries(params).filter(([, value]) => value !== null),
     );
 
     try {
@@ -20,13 +20,12 @@ function useFetch() {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        onSuccess(data);
+        return await response.json();
       } else {
-        throw new Error('데이터 로드에 실패했습니다.');
+        throw new Error('게시글 로딩 중 오류 발생');
       }
     } catch (error) {
-      if (onError) onError(error);
+      console.error(error);
     } finally {
       setIsFetching(false);
     }
