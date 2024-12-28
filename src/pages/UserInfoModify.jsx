@@ -26,6 +26,7 @@ import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './UserInfoModify.module.css';
+import useFetch from '../hooks/useFetch.js';
 
 const initialState = {
   profileImageUrl: null,
@@ -68,18 +69,15 @@ const UserInfoModify = () => {
   const originalNickname = useRef('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { isFetching, fetchData } = useFetch();
+
   useEffect(() => {
     const sessionId = Cookies.get('session_id');
 
     if (sessionId) {
       const getProfile = async () => {
         try {
-          const response = await fetch(`${API_BASE_URL}/users/me`, {
-            method: 'GET',
-            credentials: 'include',
-          });
-
-          const data = await response.json();
+          const data = await fetchData(`${API_BASE_URL}/users/me`);
 
           if (data.code === 2000) {
             if (data.data.profileImageUrl) {
@@ -211,6 +209,10 @@ const UserInfoModify = () => {
       console.error('회원 탈퇴 중 오류가 발생했습니다:', error);
     }
   };
+
+  if (isFetching) {
+    return <div>로딩 중...</div>;
+  }
 
   return (
     <section className={styles.userInfoModify}>

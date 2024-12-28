@@ -1,5 +1,5 @@
 // React 및 React Hooks
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 
 // 프로젝트 내부 컴포넌트
 import BoardHeader from '../components/board/BoardHeader';
@@ -26,25 +26,19 @@ function Index() {
 
   const { isFetching, fetchData } = useFetch();
 
-  const loadPosts = () => {
+  const loadPosts = async () => {
     if (!hasNext || isFetching) return;
 
-    fetchData(
-      `${API_BASE_URL}/posts`,
-      hasNext,
-      { size, lastId },
-      (data) => {
-        setPosts((prev) => [...prev, ...data.data.content]);
-        setHasNext(data.data.hasNext);
-        setLastId(data.data.lastId);
-      },
-      (error) => {
-        console.error('게시글 로딩 중 오류 발생:', error);
-      }
-    );
+    const data = await fetchData(`${API_BASE_URL}/posts`, hasNext, {
+      size,
+      lastId,
+    });
+    setPosts(prev => [...prev, ...data.data.content]);
+    setHasNext(data.data.hasNext);
+    setLastId(data.data.lastId);
   };
 
-  const triggerRef = useIntersectionObserver(loadPosts, isFetching,{
+  const triggerRef = useIntersectionObserver(loadPosts, isFetching, {
     root: null,
     rootMargin: '0px',
     threshold: 1.0,
