@@ -1,0 +1,22 @@
+.boardAction {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.btnSubmit {
+  width: 138px;
+  height: 39px;
+  border-radius: 16px;
+  border: none;
+  background-color: #aca0eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btnSubmit:hover {
+  background-color: #7f6aee;
+}
