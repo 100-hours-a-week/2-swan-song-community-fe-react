@@ -17,6 +17,7 @@ import { usePostContext } from '../../contexts/PostContext.jsx';
 import Button from '../../components/ui/Button.jsx';
 import Modal from '../../components/ui/Modal.jsx';
 import WithAuthenticated from '../../components/HOC/WithAuthenticated.jsx';
+import LoadingUI from '../../components/LoadingUI.jsx';
 
 // 커스텀 훅
 import useFetch from '../../hooks/useFetch.js';
@@ -136,7 +137,7 @@ const PostDetail = () => {
   };
 
   if (!post || isFetchingPost || isFetchingUser) {
-    return <div>로딩 중...</div>;
+    return <LoadingUI isFetching={isFetchingPost || isFetchingUser} />;
   }
 
   return (

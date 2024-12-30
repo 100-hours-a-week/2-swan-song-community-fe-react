@@ -16,13 +16,16 @@ import FileInput from '../components/ui/FileInput';
 import SubmitButton from '../components/ui/SubmitButton';
 import HelperText from '../components/ui/HelperText';
 import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
+import LoadingUI from '../components/LoadingUI.jsx';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import closeIcon from '../assets/close_square_light.svg';
 
+// 커스텀 훅
+import useFetch from '../hooks/useFetch.js';
+
 // 스타일 파일 (CSS Modules)
 import styles from './PostModify.module.css';
-import useFetch from '../hooks/useFetch.js';
 
 const PostModify = () => {
   const { postId: postIdStr } = useParams();
@@ -132,7 +135,7 @@ const PostModify = () => {
   };
 
   if (isFetching) {
-    return <div>로딩 중...</div>;
+    return <LoadingUI isFetching={isFetching} />;
   }
 
   return (

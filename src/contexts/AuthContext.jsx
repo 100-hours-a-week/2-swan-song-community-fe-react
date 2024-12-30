@@ -10,6 +10,9 @@ import { API_BASE_URL } from '../constants/api.js';
 // 프로젝트 내부 에셋 (이미지 파일)
 import userDefaultProfile from '../assets/user_default_profile.svg';
 
+// 프로젝트 내부 컴포넌트
+import LoadingUI from '../components/LoadingUI.jsx';
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -77,7 +80,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (isCheckingSession) {
-    return <div>Loading...</div>;
+    return <LoadingUI isFetching={isCheckingSession} />;
   }
 
   return (
