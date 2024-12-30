@@ -23,10 +23,13 @@ import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
 import Modal from '../components/ui/Modal.jsx';
 import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
+import LoadingUI from '../components/LoadingUI.jsx';
+
+// 커스텀 훅
+import useFetch from '../hooks/useFetch.js';
 
 // 스타일 파일 (CSS Modules)
 import styles from './UserInfoModify.module.css';
-import useFetch from '../hooks/useFetch.js';
 
 const initialState = {
   profileImageUrl: null,
@@ -211,7 +214,7 @@ const UserInfoModify = () => {
   };
 
   if (isFetching) {
-    return <div>로딩 중...</div>;
+    return <LoadingUI isFetching={isFetching} />;
   }
 
   return (
