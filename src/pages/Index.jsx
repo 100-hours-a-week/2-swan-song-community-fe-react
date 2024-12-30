@@ -6,6 +6,7 @@ import BoardHeader from '../components/board/BoardHeader';
 import BoardAction from '../components/board/BoardAction.jsx';
 import PostList from '../components/board/PostList.jsx';
 import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
+import LoadingUI from '../components/LoadingUI.jsx';
 
 // 커스텀 훅
 import useFetch from '../hooks/useFetch';
@@ -44,15 +45,12 @@ function Index() {
     threshold: 1.0,
   });
 
-  if (isFetching) {
-    return <div>로딩 중...</div>;
-  }
-
   return (
     <div className={styles.board}>
       <BoardHeader />
       <BoardAction />
       <PostList posts={posts} />
+      <LoadingUI isFetching={isFetching} />
       <div
         ref={triggerRef}
         style={{ height: '50px', backgroundColor: 'transparent' }}

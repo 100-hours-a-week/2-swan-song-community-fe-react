@@ -1,12 +1,15 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 
 // 전역 상태 및 컨텍스트
 import { usePostContext } from '../../contexts/PostContext.jsx';
 
-import styles from './postCommentWrapper.module.css';
+// 프로젝트 내부 컴포넌트
 import Button from '../../components/ui/Button.jsx';
 import CommentItem from '../../components/post/CommentItem.jsx';
 import { API_BASE_URL } from '../../constants/api.js';
+
+// 스타일 파일 (CSS Modules)
+import styles from './postCommentWrapper.module.css';
 
 // 리듀서
 const commentReducer = (state, action) => {
