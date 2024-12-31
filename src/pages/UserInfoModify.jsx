@@ -21,7 +21,7 @@ import userDefaultProfile from '../assets/user_default_profile.svg';
 import Button from '../components/ui/Button.jsx';
 import InputField from '../components/ui/InputField.jsx';
 import SubmitButton from '../components/ui/SubmitButton.jsx';
-import Modal from '../components/ui/Modal.jsx';
+import RemoveModal from '../components/ui/RemoveModal.jsx';
 import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 import LoadingUI from '../components/LoadingUI.jsx';
 
@@ -287,7 +287,7 @@ const UserInfoModify = () => {
           ></Button>
         </div>
       </form>
-      <Modal
+      <RemoveModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={handleWithdrawal}

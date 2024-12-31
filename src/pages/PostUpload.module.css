@@ -23,7 +23,6 @@
   width: 600px;
   padding: 20px;
   border-radius: 5px;
-  background-color: #f4f5f7;
 }
 
 .helperText {
@@ -36,11 +35,20 @@
   line-height: 14.52px;
 }
 
+.btnBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-size: 14px;
+  row-gap: 10px;
+}
+
 /* submit btn style */
 .submitBtn {
   border: none;
   border-radius: 5px;
-  background-color: #aca0eb; /* 활성화 시 색상 */
+  background-color: #79d7be; /* 활성화 시 색상 */
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
@@ -48,7 +56,7 @@
 }
 
 .submitBtn:disabled {
-  background-color: #aca0eb;
+  background-color: #4da1a9;
   cursor: not-allowed;
 }
 
@@ -106,6 +114,10 @@
   resize: none;
   border-radius: 0;
   border-bottom: 1px solid #00000040;
+}
+
+.inputBoxTextarea:focus {
+  outline: none;
 }
 
 .inputBoxTextarea::-webkit-scrollbar {

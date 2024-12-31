@@ -83,15 +83,24 @@ export default function Header({ backUrl, containProfileDropdown }) {
         {backUrl && (
           <div className={styles.back}>
             <Link to={backUrl}>
-              <img
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
                 className={styles.backImg}
-                src={shevlonLeft}
-                alt="뒤로가기"
-              />
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#F6F4F0"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-label="뒤로가기"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
             </Link>
           </div>
         )}
-        <h1 className={styles.headerTitle}>아무 말 대잔치</h1>
+        <h1 className={styles.headerTitle}>COM</h1>
+        <h1 className={styles.headerTitle}>munity</h1>
         {containProfileDropdown && (
           <div className={styles.profileDropdown}>
             <img

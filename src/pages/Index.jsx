@@ -1,5 +1,5 @@
 // React 및 React Hooks
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // 프로젝트 내부 컴포넌트
 import BoardHeader from '../components/board/BoardHeader';
@@ -22,6 +22,7 @@ import { usePostContext } from '../contexts/PostContext.jsx';
 import styles from './Index.module.css';
 
 function Index() {
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const { posts, setPosts, size, lastId, setLastId, hasNext, setHasNext } =
     usePostContext();
 
@@ -45,6 +46,25 @@ function Index() {
     threshold: 1.0,
   });
 
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={styles.board}>
       <BoardHeader />
@@ -55,6 +75,11 @@ function Index() {
         ref={triggerRef}
         style={{ height: '50px', backgroundColor: 'transparent' }}
       ></div>
+      {showScrollButton && (
+        <button className={styles.scrollToTopButton} onClick={scrollToTop}>
+          ▲
+        </button>
+      )}
     </div>
   );
 }

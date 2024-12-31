@@ -39,10 +39,11 @@
   border-radius: 50%;
   margin-right: 10px;
   border: 0.5px solid #00000040;
+  background-color: #f6f4f0;
 }
 
 .author {
-  font-weight: bold;
+  font-weight: normal;
   margin-right: 10px;
 }
 
@@ -59,7 +60,7 @@
 .commentEdit,
 .commentDelete {
   padding: 5px 10px;
-  border: 1px solid #aca0eb;
+  border: 1px solid #4da1a9;
   border-radius: 8px;
   margin-left: 10px;
   background-color: #ffffff00;

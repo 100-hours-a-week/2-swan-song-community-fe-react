@@ -12,3 +12,11 @@
 .textBold {
   font-weight: bold;
 }
+
+.textRegular {
+  font-weight: normal;
+}
+
+.textLighter {
+  font-weight: lighter;
+}
