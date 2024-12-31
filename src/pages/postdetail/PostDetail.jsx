@@ -15,9 +15,10 @@ import { usePostContext } from '../../contexts/PostContext.jsx';
 
 // 프로젝트 내부 컴포넌트
 import Button from '../../components/ui/Button.jsx';
-import Modal from '../../components/ui/Modal.jsx';
+import RemoveModal from '../../components/ui/RemoveModal.jsx';
 import WithAuthenticated from '../../components/HOC/WithAuthenticated.jsx';
 import LoadingUI from '../../components/LoadingUI.jsx';
+import PostCommentWrapper from './PostCommentWrapper.jsx';
 
 // 커스텀 훅
 import useFetch from '../../hooks/useFetch.js';
@@ -27,7 +28,6 @@ import defaultProfileImage from '../../assets/user_default_profile.svg'; // 프�
 
 // 스타일 파일 (CSS Modules)
 import styles from './PostDetail.module.css';
-import PostCommentWrapper from './PostCommentWrapper.jsx';
 
 // 초기 상태 정의
 const initialState = {
@@ -224,14 +224,14 @@ const PostDetail = () => {
         parentDispatch={dispatch}
       />
       {state.isModalOpen && (
-        <Modal
+        <RemoveModal
           isOpen={state.isModalOpen}
           onClose={() => dispatch({ type: 'CLOSE_MODAL' })}
           onConfirm={handleDeleteConfirm}
           message={state.targetMessage}
         >
           <p>삭제한 내용은 복구할 수 없습니다.</p>
-        </Modal>
+        </RemoveModal>
       )}
     </div>
   );
