@@ -85,6 +85,7 @@ const PostDetail = () => {
         true,
       );
       setPost(fetchedPost.data);
+      updatePost(fetchedPost.data);
     };
     initialize();
   }, []);
