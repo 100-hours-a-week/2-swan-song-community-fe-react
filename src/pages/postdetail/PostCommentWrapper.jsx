@@ -4,9 +4,9 @@ import React, { useReducer, useState } from 'react';
 import { usePostContext } from '../../contexts/PostContext.jsx';
 
 // 프로젝트 내부 컴포넌트
-import Button from '../../components/ui/Button.jsx';
 import CommentItem from '../../components/post/CommentItem.jsx';
 import { API_BASE_URL } from '../../constants/api.js';
+import SubmitButton from '../../components/ui/SubmitButton.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './postCommentWrapper.module.css';
@@ -188,7 +188,7 @@ export default function PostCommentWrapper({
           className={styles.commentInput}
         />
         <div className={styles.commentSubmitButtonWrapper}>
-          <Button
+          <SubmitButton
             label={commentInputButtonText}
             onClick={handleAddOrEditComment}
             className={styles.commentSubmit}

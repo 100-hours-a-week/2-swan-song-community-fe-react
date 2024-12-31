@@ -12,7 +12,6 @@ const SubmitButton = ({
   type = 'submit',
 }) => {
   return (
-    <div className={styles.btnBox}>
       <button
         className={`${styles.submitBtn} ${className || ''}`}
         type={type}
@@ -21,7 +20,6 @@ const SubmitButton = ({
       >
         {label}
       </button>
-    </div>
   );
 };
 

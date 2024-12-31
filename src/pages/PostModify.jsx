@@ -211,11 +211,13 @@ const PostModify = () => {
             />
           )}
         </div>
-        <SubmitButton
-          isValid={isValid}
-          label="수정하기"
-          className={styles.postModifyBtn}
-        />
+        <div className={styles.btnBox}>
+          <SubmitButton
+            isValid={isValid}
+            label="수정하기"
+            className={styles.postModifyBtn}
+          />
+        </div>
       </form>
     </section>
   );
