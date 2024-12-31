@@ -73,13 +73,13 @@
 }
 
 .loginBtnEnabled {
-  background-color: #4DA1A9; /* 활성화된 버튼 색상 */
+  background-color: #4da1a9; /* 활성화된 버튼 색상 */
   cursor: pointer;
   opacity: 1; /* 활성화 상태에서 투명도 제거 */
 }
 
 .loginBtnEnabled:hover {
-  background-color: #79D7BE; /* 활성화된 버튼 색상 */
+  background-color: #79d7be; /* 활성화된 버튼 색상 */
   cursor: pointer;
   opacity: 1; /* 활성화 상태에서 투명도 제거 */
 }
@@ -88,4 +88,3 @@
   text-decoration: none;
   color: #000000;
 }
-

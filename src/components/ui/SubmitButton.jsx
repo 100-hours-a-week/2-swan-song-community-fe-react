@@ -12,14 +12,14 @@ const SubmitButton = ({
   type = 'submit',
 }) => {
   return (
-      <button
-        className={`${styles.submitBtn} ${className || ''}`}
-        type={type}
-        disabled={!isValid}
-        onClick={onClick}
-      >
-        {label}
-      </button>
+    <button
+      className={`${styles.submitBtn} ${className || ''}`}
+      type={type}
+      disabled={!isValid}
+      onClick={onClick}
+    >
+      {label}
+    </button>
   );
 };
 

@@ -7,11 +7,19 @@ import Modal from './Modal.jsx';
 // 스타일 파일 (CSS Modules)
 import styles from './RemoveModal.module.css';
 
-
 const RemoveModal = ({ isOpen, onClose, onConfirm, message, children }) => {
-  const customStyle = { cancelButton: styles.cancelButton, confirmButton: styles.confirmButton }
+  const customStyle = {
+    cancelButton: styles.cancelButton,
+    confirmButton: styles.confirmButton,
+  };
   return (
-    <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm} message={message} customeStyles={customStyle}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      onConfirm={onConfirm}
+      message={message}
+      customeStyles={customStyle}
+    >
       {children}
     </Modal>
   );

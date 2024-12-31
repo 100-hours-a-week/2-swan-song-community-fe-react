@@ -7,19 +7,19 @@
 .submitBtn {
   border: none;
   border-radius: 5px;
-  background-color: #4DA1A9; /* 기본 비활성화 상태 */
+  background-color: #4da1a9; /* 기본 비활성화 상태 */
   color: #ffffff;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition:
-          background-color 0.3s,
-          opacity 0.3s,
-          cursor 0.3s;
+    background-color 0.3s,
+    opacity 0.3s,
+    cursor 0.3s;
 }
 
 .submitBtn:hover {
-  background-color: #79D7BE; /* 기본 호버 상태 */
+  background-color: #79d7be; /* 기본 호버 상태 */
 }
 
 .submitBtn:disabled {

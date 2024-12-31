@@ -7,7 +7,14 @@ import classNames from 'classnames';
 // 스타일 파일 (CSS Modules)
 import styles from './Modal.module.css';
 
-const Modal = ({ isOpen, onClose, onConfirm, message, children, customeStyles }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  message,
+  children,
+  customeStyles,
+}) => {
   if (!isOpen) return null;
 
   const handleBackgroundClick = event => {
@@ -22,10 +29,22 @@ const Modal = ({ isOpen, onClose, onConfirm, message, children, customeStyles })
         <h4>{message}</h4>
         {children && <div className={styles.modalBody}>{children}</div>}
         <div className={styles.modalActions}>
-          <button className={classNames(styles.cancelButton, customeStyles?.cancelButton)} onClick={onClose}>
+          <button
+            className={classNames(
+              styles.cancelButton,
+              customeStyles?.cancelButton,
+            )}
+            onClick={onClose}
+          >
             취소
           </button>
-          <button className={classNames(styles.confirmButton, customeStyles?.confirmButton)} onClick={onConfirm}>
+          <button
+            className={classNames(
+              styles.confirmButton,
+              customeStyles?.confirmButton,
+            )}
+            onClick={onConfirm}
+          >
             확인
           </button>
         </div>
