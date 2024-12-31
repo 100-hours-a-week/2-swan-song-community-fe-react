@@ -188,6 +188,7 @@ export default function PostCommentWrapper({
           className={styles.commentInput}
         />
         <div className={styles.commentSubmitButtonWrapper}>
+          <div className={styles.commentWrapperCommentCount}>{`댓글수 ${state.commentCount}`}</div>
           <SubmitButton
             label={commentInputButtonText}
             onClick={handleAddOrEditComment}

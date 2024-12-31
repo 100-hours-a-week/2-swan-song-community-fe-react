@@ -24,7 +24,14 @@
 .commentSubmitButtonWrapper {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.commentWrapperCommentCount {
+    font-size: 16px;
+    color: #00000090;
 }
 
 .commentSubmit {

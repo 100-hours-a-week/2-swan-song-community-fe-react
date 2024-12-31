@@ -25,6 +25,7 @@ import useFetch from '../../hooks/useFetch.js';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import defaultProfileImage from '../../assets/user_default_profile.svg'; // 프로필 기본 이미지
+import thumbUp from '../../assets/thumb_up.svg'; // 좋아요 버튼 이미지
 
 // 스타일 파일 (CSS Modules)
 import styles from './PostDetail.module.css';
@@ -143,7 +144,19 @@ const PostDetail = () => {
   return (
     <div className={styles.postDetail}>
       <div className={styles.infoTop}>
-        <h1 className={styles.postTitle}>{post.title}</h1>
+        <div>
+          <h1 className={styles.postTitle}>{post.title}</h1>
+          <div className={styles.infoTopMetadataContainer}>
+            <div className={styles.infoTopMetadata}>
+              <span>조회수 </span>
+              <span>{post.viewCount}</span>
+            </div>
+            <div>
+              <span>댓글수 </span>
+              <span>{post.commentCount}</span>
+            </div>
+          </div>
+        </div>
         <div className={styles.postInfo}>
           <div className={styles.leftInfo}>
             <img
@@ -203,17 +216,9 @@ const PostDetail = () => {
           )}
           onClick={handleToggleLike}
         >
-          <div>좋아요 수</div>
-          <div>{post.likeCount}</div>
+          <img src={thumbUp} />
+          <div>{`좋아요 수   ${post.likeCount}`}</div>
         </Button>
-        <div className={styles.btnReaction}>
-          <div>조회수</div>
-          <div>{post.viewCount}</div>
-        </div>
-        <div className={styles.btnReaction}>
-          <div>댓글수</div>
-          <div>{post.commentCount}</div>
-        </div>
       </div>
       {/* 댓글 래퍼 */}
       <PostCommentWrapper

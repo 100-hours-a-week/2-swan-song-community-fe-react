@@ -12,15 +12,27 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  row-gap: 20px;
+  row-gap: 14px;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid #00000040;
 }
 
+.infoTopMetadataContainer {
+  display: flex;
+  font-weight: lighter;
+  color: #00000080;
+  font-size: 14px;
+}
+
+.infoTopMetadata {
+  margin-right: 8px;
+}
+
 .postTitle {
+  margin-bottom: 4px;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .postInfo {
@@ -45,7 +57,7 @@
 }
 
 .author {
-  font-weight: bold;
+  font-weight: normal;
   margin-right: 10px;
 }
 
@@ -91,27 +103,24 @@
 }
 
 .postReaction {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 60%;
-  padding: 20px;
+    display: flex;
 }
 
 .btnReaction {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  row-gap: 2px;
-  background-color: #d9d9d9;
-  width: 116px;
-  height: 77px;
-  border-radius: 15px;
-  font-weight: bold;
-  font-size: small;
-  margin: 5px;
-  color: #000000;
+    justify-content: center;
+    align-items: center;
+  padding: 6px;
+}
+
+.btnReaction img {
+  background-color: #dddddd;
+  border-radius: 50%;
+  margin-right: 4px
+}
+
+.btnReaction:hover {
+  background-color: #79D7BE;
 }
 
 .postLikedActive {
@@ -162,10 +171,5 @@
 
   .postReaction {
     padding: 0;
-  }
-
-  .btnReaction {
-    width: 100px; /* 버튼 너비 축소 */
-    height: 70px;
   }
 }
