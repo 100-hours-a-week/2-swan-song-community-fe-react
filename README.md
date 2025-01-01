@@ -43,18 +43,22 @@ src/
       <img width="300" alt="상세 게시글" src="https://github.com/user-attachments/assets/e74ed113-f127-42dc-9271-f9bd8d171426" />
     </td>
     <td align="center">
-      <strong>게시글 수정</strong><br>
-      <img width="300" alt="게시글 수정" src="https://github.com/user-attachments/assets/6fbdfd7d-3321-45f3-b7b7-c6e7c86d242d" />
+      <strong>게시글 작성</strong><br>
+      <img width="300" alt="스크린샷 2025-01-02 오전 2 30 17" src="https://github.com/user-attachments/assets/e754abad-6949-4efc-8078-9bcf745ff20e" />
     </td>
     <td align="center">
-      <strong>사용자 비밀번호 수정</strong><br>
-      <img width="300" alt="사용자 비밀번호 수정" src="https://github.com/user-attachments/assets/31234316-3d39-4684-a0ea-44d935bf9550" />
+      <strong>게시글 수정</strong><br>
+      <img width="300" alt="게시글 수정" src="https://github.com/user-attachments/assets/6fbdfd7d-3321-45f3-b7b7-c6e7c86d242d" />
     </td>
   </tr>
   <tr>
     <td align="center">
-      <strong>사용자 정보 수정</strong><br>
-      <img width="300" alt="사용자 정보 수정" src="https://github.com/user-attachments/assets/660f626f-26d8-4515-8c6c-78ee4d6656eb" />
+      <strong>회원 정보 수정</strong><br>
+      <img width="300" alt="회원 정보 수정" src="https://github.com/user-attachments/assets/660f626f-26d8-4515-8c6c-78ee4d6656eb" />
+    </td>
+    <td align="center">
+      <strong>회원 비밀번호 수정</strong><br>
+      <img width="300" alt="회원 비밀번호 수정" src="https://github.com/user-attachments/assets/31234316-3d39-4684-a0ea-44d935bf9550" />
     </td>
     <td align="center">
       <strong>모달</strong><br>
