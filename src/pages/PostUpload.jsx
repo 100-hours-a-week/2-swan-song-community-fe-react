@@ -137,11 +137,13 @@ const PostUpload = () => {
           name="postImage"
           onChange={handleImageChange}
         />
-        <SubmitButton
-          isValid={isValid}
-          label="생성하기"
-          className={styles.postUploadBtn}
-        />
+        <div className={styles.btnBox}>
+          <SubmitButton
+            isValid={isValid}
+            label="생성하기"
+            className={styles.postUploadBtn}
+          />
+        </div>
       </form>
     </section>
   );

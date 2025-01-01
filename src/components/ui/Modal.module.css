@@ -44,12 +44,20 @@
   font-size: small;
 }
 
+.cancelButton:hover {
+  background-color: #00000060;
+}
+
 .confirmButton {
-  background-color: #7f6aed;
+  background-color: #4da1a9;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   font-weight: bold;
   font-size: small;
+}
+
+.confirmButton:hover {
+  background-color: #79d7be;
 }
