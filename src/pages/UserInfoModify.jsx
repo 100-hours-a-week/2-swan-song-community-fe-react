@@ -11,7 +11,7 @@ import Cookies from 'js-cookie';
 import { usePostContext } from '../contexts/PostContext.jsx';
 
 // 상수 및 환경 변수
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+import { API_BASE_URL } from '../constants/api.js';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import closeIcon from '../assets/close_square_light.svg';
@@ -87,7 +87,7 @@ const UserInfoModify = () => {
               hasAlreadyProfileImage.current = true;
             }
             const profileUrl = data.data.profileImageUrl
-              ? `${IMAGE_BASE_URL}${data.data.profileImageUrl}`
+              ? data.data.profileImageUrl
               : userDefaultProfile;
             dispatch({ type: 'INITIALIZE', payload: profileUrl });
             setEmail(data.data.email);

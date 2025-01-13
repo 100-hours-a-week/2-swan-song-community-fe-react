@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // 상수 및 환경 변수
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+import { API_BASE_URL } from '../constants/api.js';
 
 // 전역 컨텍스트
 import { usePostContext } from '../contexts/PostContext.jsx';
@@ -63,7 +63,7 @@ const PostModify = () => {
           setTitle(result.data.title);
           setContent(result.data.content);
           if (result.data.imageUrl) {
-            setExistingImage(`${IMAGE_BASE_URL}${result.data.imageUrl}`);
+            setExistingImage(result.data.imageUrl);
           }
         }
       } catch (error) {

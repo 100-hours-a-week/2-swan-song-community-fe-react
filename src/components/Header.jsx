@@ -6,7 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 // 상수 및 환경 변수
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+import { API_BASE_URL } from '../constants/api.js';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import shevlonLeft from '../assets/shevlon_left.svg';
@@ -38,7 +38,7 @@ export default function Header({ backUrl, containProfileDropdown }) {
 
           if (data.code === 2000) {
             const profileUrl = data.data.profileImageUrl
-              ? `${IMAGE_BASE_URL}${data.data.profileImageUrl}`
+              ? data.data.profileImageUrl
               : userDefaultProfile;
 
             updateAuthState(true, profileUrl);

@@ -5,9 +5,6 @@ import { useNavigate } from 'react-router-dom';
 // 프로젝트 내부 이미지 및 에셋
 import userDefaultProfile from '../../assets/user_default_profile.svg';
 
-// 상수 및 환경변수
-import { IMAGE_BASE_URL } from '../../constants/api';
-
 // CSS Modules 스타일 파일
 import styles from './PostItem.module.css';
 
@@ -43,7 +40,7 @@ const PostItem = ({ post }) => {
           className={styles.profileImage}
           src={
             post.author.profileImageUrl
-              ? `${IMAGE_BASE_URL}/${post.author.profileImageUrl}`
+              ? post.author.profileImageUrl
               : userDefaultProfile
           }
           alt="프로필 이미지"
