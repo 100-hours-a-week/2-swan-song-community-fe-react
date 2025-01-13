@@ -5,7 +5,7 @@ ENVIRONMENT="${1:-prod}"
 
 # 필요한 Parameter 이름 목록
 PARAMETERS=(
-  "/ktb-community/$ENVIRONMENT/config/api-base-url"
+  "/ktb-community/$ENVIRONMENT/config/vite-api-base-url"
 )
 
 # 파라미터 목록을 ", "로 구분된 문자열로 변환
