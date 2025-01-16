@@ -32,8 +32,6 @@ for PARAM in "${PARAMETERS[@]}"; do
   VAR_NAME=$(echo "$PARAM" | sed 's|/ktb-community/.*/config/||g' | sed 's|[^a-zA-Z0-9]|_|g' | tr '[:lower:]' '[:upper:]')
 
   # 환경 변수 설정
-  echo "$VAR_NAME=$VALUE"
+  echo "$VAR_NAME=$VALUE" >> .env
 done
 
-# 환경 변수 설정
-# load_env.sh > .env
