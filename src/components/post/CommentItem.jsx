@@ -1,9 +1,6 @@
 // React 라이브러리
 import React from 'react';
 
-// 상수 및 환경 변수
-import { IMAGE_BASE_URL } from '../../constants/api.js';
-
 // 프로젝트 내부 에셋 (이미지 파일)
 import defaultProfileImage from '../../assets/user_default_profile.svg'; // 프로필 기본 이미지
 
@@ -22,7 +19,7 @@ const CommentItem = ({ comment, userId, onEdit, onDelete }) => {
             className={styles.profileImage}
             src={
               comment.author.profileImageUrl
-                ? `${IMAGE_BASE_URL}${comment.author.profileImageUrl}`
+                ? comment.author.profileImageUrl
                 : defaultProfileImage
             }
             alt="프로필 이미지"

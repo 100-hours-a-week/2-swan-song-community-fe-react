@@ -5,7 +5,7 @@ import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // 상수 및 환경 변수
-import { API_BASE_URL, IMAGE_BASE_URL } from '../../constants/api.js';
+import { API_BASE_URL } from '../../constants/api.js';
 
 // 외부 라이브러리
 import classNames from 'classnames';
@@ -163,7 +163,7 @@ const PostDetail = () => {
             <img
               src={
                 post.author.profileImageUrl
-                  ? `${IMAGE_BASE_URL}${post.author.profileImageUrl}`
+                  ? post.author.profileImageUrl
                   : defaultProfileImage
               }
               alt="프로필 이미지"
@@ -201,7 +201,7 @@ const PostDetail = () => {
         {post.imageUrl && (
           <img
             className={styles.contentImage}
-            src={`${IMAGE_BASE_URL}${post.imageUrl}`}
+            src={post.imageUrl}
             alt="내용 이미지"
           />
         )}

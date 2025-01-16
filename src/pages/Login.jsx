@@ -12,7 +12,7 @@ import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
 
 // 상수 및 환경 변수
-import { API_BASE_URL, IMAGE_BASE_URL } from '../constants/api.js';
+import { API_BASE_URL } from '../constants/api.js';
 
 // 전역 상태 및 컨텍스트
 import { useAuth } from '../contexts/AuthContext';
@@ -87,7 +87,7 @@ export default function Login() {
         resetPost();
         resetAuthState();
         const profileUrl = result.data.profileImageUrl
-          ? `${IMAGE_BASE_URL}${result.data.profileImageUrl}`
+          ? result.data.profileImageUrl
           : userDefaultProfile;
         updateAuthState(true, profileUrl);
         navigate('/');
