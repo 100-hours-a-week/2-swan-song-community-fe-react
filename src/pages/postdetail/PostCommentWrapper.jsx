@@ -9,7 +9,7 @@ import { API_BASE_URL } from '../../constants/api.js';
 import SubmitButton from '../../components/ui/SubmitButton.jsx';
 
 // 스타일 파일 (CSS Modules)
-import styles from './postCommentWrapper.module.css';
+import styles from './PostCommentWrapper.module.css';
 
 // 리듀서
 const commentReducer = (state, action) => {
