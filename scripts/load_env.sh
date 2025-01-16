@@ -15,8 +15,7 @@ PARAMETER_NAMES=${PARAMETER_NAMES:1} # 맨 앞의 ", " 제거
 # SSM Parameters 값 가져오기
 RESPONSE=$(aws ssm get-parameters \
     --names $PARAMETER_NAMES \
-    --with-decryption \
-    --profile param)
+    --with-decryption)
 
 # 각 파라미터를 환경 변수로 설정
 for PARAM in "${PARAMETERS[@]}"; do
