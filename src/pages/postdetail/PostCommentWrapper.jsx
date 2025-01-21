@@ -84,18 +84,22 @@ export default function PostCommentWrapper({
         body: JSON.stringify({ postId, content }),
       });
       const result = await response.json();
-      dispatch({
-        type: 'ADD_COMMENT',
-        payload: result.data.comment,
-        post,
-        setPost,
-      });
+
       if (result.code === 2001) {
+        dispatch({
+          type: 'ADD_COMMENT',
+          payload: result.data.comment,
+          post,
+          setPost,
+        });
+
         setCommentInputText('');
 
         const updatedPost = posts.find(post => post.postId === postId);
         updatedPost.commentCount += 1;
         updatePost(updatedPost);
+      } else if (result.code === 4000) {
+        alert(result.message);
       } else {
         console.error('댓글 등록 실패:', result.message);
       }
@@ -126,6 +130,8 @@ export default function PostCommentWrapper({
         dispatch({ type: 'EDIT_COMMENT', payload: result.data.comment });
         setEditCommentId(null);
         setCommentInputText('');
+      } else if (result.code === 4000) {
+        alert(result.message);
       } else {
         console.error(`댓글 수정에 실패했습니다: ${result.message}`);
       }
