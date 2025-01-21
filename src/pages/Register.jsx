@@ -87,6 +87,16 @@ export default function Register() {
     const password = e.target.value;
     setFormData(prev => ({ ...prev, password }));
     setErrors(prev => ({ ...prev, password: validatePassword(password) }));
+
+    if (formData.passwordChecker) {
+      setErrors(prev => ({
+        ...prev,
+        passwordChecker: validatePasswordCheck(
+          password,
+          formData.passwordChecker,
+        ),
+      }));
+    }
   };
 
   const handlePasswordCheckerChange = e => {
