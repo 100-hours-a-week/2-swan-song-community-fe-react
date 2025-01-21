@@ -23,6 +23,9 @@
   min-height: 31px;
   font-size: 24px;
   font-weight: normal;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  overflow-wrap: break-word; /* 텍스트 줄바꿈 */
 }
 
 .downInfo {
