@@ -1,5 +1,5 @@
 export const validateEmail = email =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
     ? ''
     : '* 유효한 이메일을 입력하세요.';
 
