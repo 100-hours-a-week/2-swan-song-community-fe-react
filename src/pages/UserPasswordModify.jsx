@@ -73,9 +73,12 @@ const UserPasswordModify = () => {
         credentials: 'include',
       });
 
-      if ((await response.json()).code === 2000) {
+      const jsonData = await response.json();
+      if (jsonData.code === 2000) {
         alert('비밀번호가 성공적으로 수정되었습니다.');
         navigate('/');
+      } else if (jsonData.code === 4000) {
+        alert(jsonData.message);
       } else {
         alert('비밀번호 수정에 실패했습니다.');
       }
