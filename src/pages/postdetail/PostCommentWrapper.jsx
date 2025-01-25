@@ -152,6 +152,8 @@ export default function PostCommentWrapper({
       if (response.status === 204) {
         dispatch({ type: 'DELETE_COMMENT', payload: id, post, setPost });
         const updatedPost = posts.find(post => post.postId === postId);
+        setCommentInputText("");
+        setEditCommentId(null);
         updatedPost.commentCount -= 1;
         updatePost(updatedPost);
       } else {
