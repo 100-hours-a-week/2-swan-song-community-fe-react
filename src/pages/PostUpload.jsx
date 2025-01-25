@@ -33,7 +33,12 @@ const PostUpload = () => {
   };
 
   const handleContentChange = event => {
-    setContent(event.target.value);
+    const content = event.target.value;
+    if (content.length > 1000) {
+      alert("게시글은 1000자 이하로 작성해주세요.");
+      return;
+    }
+    setContent(content);
   };
 
   const handleImageChange = event => {
@@ -98,7 +103,7 @@ const PostUpload = () => {
         console.error('업로드 실패:', result.message);
       }
     } catch (error) {
-      alert('게시글 업로드 중 오류가 발생했습니다.');
+      alert(error.message || '게시글 업로드 중 오류가 발생했습니다.');
       console.error('게시글 업로드 중 오류:', error);
     }
   };
