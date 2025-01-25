@@ -150,6 +150,16 @@ const UserInfoModify = () => {
   // 파일 선택 이벤트 핸들러
   const handleFileChange = () => {
     const file = profileImageInput.current.files[0];
+
+    if (file) {
+      // 파일 MIME 타입 검증
+      if (!file.type.startsWith("image/")) {
+        alert("유효한 이미지가 아닙니다.");
+        event.target.value = ""; // 입력 값 초기화
+        return;
+      }
+    }
+
     if (file) {
       const objectUrl = URL.createObjectURL(file);
       dispatch({ type: 'SET_PROFILE_IMAGE', payload: objectUrl });
@@ -243,6 +253,7 @@ const UserInfoModify = () => {
             <input
               name="profileImage"
               type={'file'}
+              accept={'image/*'}
               ref={profileImageInput}
               hidden
               onChange={handleFileChange}

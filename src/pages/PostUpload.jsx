@@ -37,7 +37,18 @@ const PostUpload = () => {
   };
 
   const handleImageChange = event => {
-    setImage(event.target.files[0]);
+    const file = event.target.files[0];
+
+    if (file) {
+      // 파일 MIME 타입 검증
+      if (!file.type.startsWith("image/")) {
+        alert("유효한 이미지가 아닙니다.");
+        event.target.value = ""; // 입력 값 초기화
+        return;
+      }
+    }
+
+    setImage(file);
   };
 
   useEffect(() => {

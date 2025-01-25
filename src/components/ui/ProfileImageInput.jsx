@@ -12,6 +12,16 @@ const FileInput = ({ label, name, onChange, preview }) => {
 
   const handleImageChange = event => {
     const file = event.target.files[0];
+
+    if (file) {
+      // 파일 MIME 타입 검증
+      if (!file.type.startsWith("image/")) {
+        alert("유효한 이미지가 아닙니다.");
+        event.target.value = ""; // 입력 값 초기화
+        return;
+      }
+    }
+
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
