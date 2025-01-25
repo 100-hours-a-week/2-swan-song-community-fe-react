@@ -84,6 +84,12 @@ const PostDetail = () => {
         `${API_BASE_URL}/posts/${postId}`,
         true,
       );
+
+      if (fetchedPost.code === 4004) {
+        alert(fetchedPost.message);
+        navigate("/");
+      }
+
       setPost(fetchedPost.data);
       updatePost(fetchedPost.data);
     };
