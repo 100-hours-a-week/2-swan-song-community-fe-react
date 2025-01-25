@@ -85,9 +85,10 @@ const PostDetail = () => {
         true,
       );
 
-      if (fetchedPost.code === 4004) {
-        alert(fetchedPost.message);
+      if (!fetchedPost || fetchedPost.code === 4004) {
+        alert(fetchedPost ? fetchedPost.message : "게시글이 유효하지 않습니다.");
         navigate("/");
+        return;
       }
 
       setPost(fetchedPost.data);
