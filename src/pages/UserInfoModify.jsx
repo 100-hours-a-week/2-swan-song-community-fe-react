@@ -65,7 +65,7 @@ const UserInfoModify = () => {
   const profileImageInput = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [email, setEmail] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(null);
   const [nicknameStatus, setNicknameStatus] = useState(false);
   const [nicknameMessage, setNicknameMessage] = useState('');
   const navigate = useNavigate();
@@ -91,7 +91,6 @@ const UserInfoModify = () => {
               : userDefaultProfile;
             dispatch({ type: 'INITIALIZE', payload: profileUrl });
             setEmail(data.data.email);
-            setNickname(data.data.nickname);
             originalNickname.current = data.data.nickname;
           }
         } catch (error) {
@@ -148,14 +147,21 @@ const UserInfoModify = () => {
   }, [nickname]);
 
   // 파일 선택 이벤트 핸들러
-  const handleFileChange = () => {
+  const handleFileChange = event => {
     const file = profileImageInput.current.files[0];
 
     if (file) {
       // 파일 MIME 타입 검증
-      if (!file.type.startsWith("image/")) {
-        alert("유효한 이미지가 아닙니다.");
-        event.target.value = ""; // 입력 값 초기화
+      if (!file.type.startsWith('image/')) {
+        alert('유효한 이미지가 아닙니다.');
+        event.target.value = ''; // 입력 값 초기화
+        return;
+      }
+
+      // 파일 크기 검증
+      if (file.size > 1024 * 1024 * 5) {
+        alert('이미지는 5MB 이하로 업로드 가능합니다.');
+        event.target.value = ''; // 입력 값 초기화
         return;
       }
     }
@@ -173,7 +179,9 @@ const UserInfoModify = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('nickname', nickname);
+    if (nickname && nickname !== originalNickname.current) {
+      formData.append('nickname', nickname);
+    }
     formData.append(
       'isProfileImageRemoved',
       hasAlreadyProfileImage.current && state.isImageChanged,
@@ -195,7 +203,7 @@ const UserInfoModify = () => {
         adjustUpdatingUser(data.data);
         navigate('/');
       } else {
-        alert('회원정보 수정에 실패했습니다.');
+        alert(data.message || '회원정보 수정에 실패했습니다.');
       }
     } catch (error) {
       console.error('회원정보 수정 중 오류가 발생했습니다:', error);
@@ -209,7 +217,7 @@ const UserInfoModify = () => {
         credentials: 'include',
       });
 
-      const res = await response;
+      const res = await response.json();
 
       if (res.status === 204) {
         alert('회원 탈퇴가 완료되었습니다.');
@@ -272,10 +280,8 @@ const UserInfoModify = () => {
         <InputField
           label="닉네임"
           name="nickname"
-          value={nickname}
           onChange={event => setNickname(event.target.value)}
-          placeholder="닉네임을 입력하세요"
-          initialvalue={nickname}
+          placeholder={originalNickname.current}
           helperMessage={nicknameMessage}
           isError={!nicknameStatus}
         />

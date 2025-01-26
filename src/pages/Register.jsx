@@ -1,5 +1,5 @@
 // React 및 React Hooks
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 // React Router 라이브러리
 import { useNavigate, Link } from 'react-router-dom';
@@ -43,6 +43,7 @@ export default function Register() {
   const [nicknameStatus, setNicknameStatus] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
+  const nicknameRef = useRef(null);
 
   const validateNickname = async nickname => {
     const trimmedNickname = nickname.trim();
@@ -63,13 +64,30 @@ export default function Register() {
         `${API_BASE_URL}/auth/check-nickname?nickname=${trimmedNickname}`,
       );
       const data = await response.json();
+      const currentNicknameVal = nicknameRef.current.value; // state 반영 타이밍과 input 태그 반영 타이밍이 달라 예외처리
 
       if (data.data.isAvailable) {
-        setNicknameStatus(true);
-        setNicknameMessage('사용 가능한 닉네임입니다.');
+        if (currentNicknameVal === '') {
+          setNicknameStatus(false);
+          setNicknameMessage('* 닉네임을 입력하세요.');
+        } else if (currentNicknameVal.length > 10) {
+          setNicknameStatus(false);
+          setNicknameMessage('* 닉네임은 10자리 이하여야 합니다.');
+        } else {
+          setNicknameStatus(true);
+          setNicknameMessage('사용 가능한 닉네임입니다.');
+        }
       } else {
-        setNicknameStatus(false);
-        setNicknameMessage('* 닉네임이 중복되었습니다.');
+        if (currentNicknameVal === '') {
+          setNicknameStatus(false);
+          setNicknameMessage('* 닉네임을 입력하세요.');
+        } else if (currentNicknameVal.length > 10) {
+          setNicknameStatus(false);
+          setNicknameMessage('* 닉네임은 10자리 이하여야 합니다.');
+        } else {
+          setNicknameStatus(false);
+          setNicknameMessage(`* ${data.message || '닉네임이 중복되었습니다.'}`);
+        }
       }
     } catch {
       setNicknameStatus(false);
@@ -118,8 +136,22 @@ export default function Register() {
   };
 
   const handleProfileImageChange = e => {
-    const file = e.target.files[0];
+    const file = e.target.files ? e.target.files[0] : null;
     if (file) {
+      // 파일 MIME 타입 검증
+      if (!file.type.startsWith('image/')) {
+        alert('유효한 이미지가 아닙니다.');
+        e.target.value = ''; // 입력 값 초기화
+        return;
+      }
+
+      // 파일 크기 검증
+      if (file.size > 1024 * 1024 * 5) {
+        alert('이미지는 5MB 이하로 업로드 가능합니다.');
+        e.target.value = ''; // 입력 값 초기화
+        return;
+      }
+
       if (imagePreview) URL.revokeObjectURL(imagePreview);
       setImagePreview(URL.createObjectURL(file));
       setFormData(prev => ({ ...prev, profileImage: file }));
@@ -156,7 +188,7 @@ export default function Register() {
         alert(result.message || '회원가입에 실패했습니다.');
       }
     } catch (error) {
-      alert('회원가입 중 오류가 발생했습니다.');
+      alert(error.message || '회원가입 중 오류가 발생했습니다.');
       console.error('회원가입 중 오류 발생:', error);
     }
   };
@@ -170,6 +202,10 @@ export default function Register() {
           name="profileImage"
           onChange={handleProfileImageChange}
           preview={imagePreview}
+          onClickDeleteBtn={() => {
+            setImagePreview(null);
+            setFormData(prev => ({ ...prev, profileImage: null }));
+          }}
         />
         <InputField
           label="이메일 *"
@@ -204,6 +240,7 @@ export default function Register() {
           label="닉네임 *"
           name="nickname"
           value={formData.nickname}
+          ref={nicknameRef}
           onChange={handleNicknameChange}
           placeholder="닉네임을 입력하세요"
           helperMessage={nicknameMessage}

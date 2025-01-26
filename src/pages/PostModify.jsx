@@ -85,7 +85,7 @@ const PostModify = () => {
   const handleContentChange = event => {
     const content = event.target.value;
     if (content.length > 1000) {
-      alert("게시글은 1000자 이하로 작성해주세요.");
+      alert('게시글은 1000자 이하로 작성해주세요.');
       return;
     }
     setContent(content);
@@ -96,9 +96,16 @@ const PostModify = () => {
 
     if (file) {
       // 파일 MIME 타입 검증
-      if (!file.type.startsWith("image/")) {
-        alert("유효한 이미지가 아닙니다.");
-        event.target.value = ""; // 입력 값 초기화
+      if (!file.type.startsWith('image/')) {
+        alert('유효한 이미지가 아닙니다.');
+        event.target.value = ''; // 입력 값 초기화
+        return;
+      }
+
+      // 파일 크기 검증
+      if (file.size > 1024 * 1024 * 5) {
+        alert('이미지는 5MB 이하로 업로드 가능합니다.');
+        event.target.value = ''; // 입력 값 초기화
         return;
       }
     }

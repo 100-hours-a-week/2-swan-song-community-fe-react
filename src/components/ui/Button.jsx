@@ -3,6 +3,7 @@ import React from 'react';
 
 // 스타일 파일 (CSS Modules)
 import styles from './Button.module.css';
+import classNames from 'classnames';
 
 const Button = ({
   isValid = true,
@@ -15,7 +16,7 @@ const Button = ({
 }) => {
   return (
     <button
-      className={`${styles.defaultBtn} ${className || ''}`}
+      className={classNames(styles.defaultBtn, className)}
       type={type}
       disabled={!isValid}
       onClick={onClick}
