@@ -4,7 +4,7 @@ import React from 'react';
 // 스타일 파일 (CSS Modules)
 import styles from './FileInput.module.css';
 
-const FileInput = ({ label, name, onChange, accept = "image/*" }) => {
+const FileInput = ({ label, name, onChange, accept = 'image/*' }) => {
   return (
     <div className={styles.inputBox}>
       <div className={styles.imageContainer}>

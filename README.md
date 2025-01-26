@@ -1,6 +1,7 @@
 # COMmunity (FE)
 
 ## 🚀 프로젝트 소개
+
 - **프로젝트 설명**: KTB 실습 과제인 간단한 커뮤니티 사이트 입니다.
 - **기술 스택**: JS, React, Vite
 - [server repo](https://github.com/100-hours-a-week/2-swan-song-community-be)
@@ -8,12 +9,13 @@
 <br>
 
 ## 📂 프로젝트 구조
+
 ```plaintext
 src/
 ├── assets/          # 이미지, 폰트 등 정적 파일
 ├── components/      # 재사용 가능한 컴포넌트
-├── constants/       # 설정용 상수 
-├── contexts/        # 전역 상태 
+├── constants/       # 설정용 상수
+├── contexts/        # 전역 상태
 ├── hooks/           # 커스텀 훅
 ├── pages/           # 페이지별 컴포넌트
 └── utils/           # 공통 유틸리티 함수
@@ -22,6 +24,7 @@ src/
 <br>
 
 ## 🖥️ 서비스 화면
+
 <table>
   <tr>
     <td align="center">
@@ -69,5 +72,6 @@ src/
 <br>
 
 ## 관심에 두고 있는 것
+
 1. 상태를 잘 관리해 원활한 웹앱 환경 유지
 2. 재사용성 좋은 컴포넌트 설계
