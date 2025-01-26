@@ -8,15 +8,17 @@ export const validatePassword = password => {
   const hasNumber = /[0-9]/.test(password);
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
-  const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  const hasSpecialChar = /[!@#$%^&*(),.?":;{}|<>]/.test(password);
+  const hasNoSpace = !/\s/.test(password); // 공백이 없어야 함
 
   return isValidLength &&
     hasNumber &&
     hasUpperCase &&
     hasLowerCase &&
-    hasSpecialChar
+    hasSpecialChar &&
+    hasNoSpace
     ? ''
-    : '* 비밀번호는 8자 이상 20자 이하이며, 특수문자, 영어, 숫자를 각각 하나 이상 포함해야 합니다.';
+    : '* 비밀번호는 8자 이상 20자 이하이며, 공백 없이 특수문자, 영어 대문자, 영어 소문자, 숫자를 각각 하나 이상 포함해야 합니다.';
 };
 
 export const validatePasswordCheck = (password, passwordChecker) =>
