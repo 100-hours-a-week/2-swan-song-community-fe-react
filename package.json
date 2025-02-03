@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.0",
+    "axios": "^1.7.9",
     "classnames": "^2.5.1",
     "js-cookie": "^3.0.5",
     "prettier": "^3.4.1",
