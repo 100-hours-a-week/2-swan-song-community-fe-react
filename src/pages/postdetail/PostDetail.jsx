@@ -90,7 +90,6 @@ const PostDetail = () => {
       }
 
       setPost(fetchedPost.data);
-      updatePost(fetchedPost.data);
     };
     initialize();
   }, []);
@@ -128,12 +127,10 @@ const PostDetail = () => {
         post.isLiked = false;
         post.likeCount -= 1;
         setPost({ ...post });
-        updatePost(post);
       } else if ((await response.json()).code === 2001) {
         post.isLiked = true;
         post.likeCount += 1;
         setPost({ ...post });
-        updatePost(post);
       } else {
         console.error(`좋아요 처리 실패`);
       }

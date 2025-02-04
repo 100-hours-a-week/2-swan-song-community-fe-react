@@ -46,7 +46,7 @@ export default function Register() {
   const nicknameRef = useRef(null);
 
   const validateNickname = async nickname => {
-    const trimmedNickname = nickname.trim();
+    const trimmedNickname = nickname?.trim() || '';
 
     if (!trimmedNickname) {
       setNicknameStatus(false);
