@@ -20,7 +20,6 @@ import styles from "./Index.module.css";
 
 function Index() {
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const queryClient = useQueryClient();
 
   // 게시글 가져오는 함수
   const fetchPosts = async ({ pageParam = null }) => {
@@ -46,6 +45,7 @@ function Index() {
   });
 
   // Intersection Observer를 통한 무한스크롤 트리거
+  const debounceTimer = useRef(null);
   const observer = useRef();
   const triggerRef = useCallback(
     (node) => {
@@ -54,7 +54,10 @@ function Index() {
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
+          if (debounceTimer.current) clearTimeout(debounceTimer.current); // 이전 타이머 제거
+          debounceTimer.current = setTimeout(() => {
+            fetchNextPage();
+          }, 300);
         }
       });
 
