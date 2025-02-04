@@ -12,6 +12,9 @@ import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
 import ProfileImageInput from '../components/ui/ProfileImageInput';
 
+
+import  axios  from 'axios';
+
 // 프로젝트 내부 util 함수
 import {
   validateEmail,
@@ -95,10 +98,34 @@ export default function Register() {
     }
   };
 
-  const handleEmailChange = e => {
+
+  const checkAvailableEmail = async email => {
+
+    const response = (await axios.get(`${API_BASE_URL}/auth/check-email?email=${email}`)).data;
+
+    if (response.data.isAvailable) {
+      return '';
+    } else {
+      return '* 이미 가입된 이메일입니다.';
+    }
+  }
+
+  const handleEmailChange = async e => {
     const email = e.target.value;
     setFormData(prev => ({ ...prev, email }));
-    setErrors(prev => ({ ...prev, email: validateEmail(email) }));
+
+    const availableFormat = validateEmail(email);
+    if (availableFormat) {
+      setErrors(prev => ({ ...prev, email: availableFormat }));
+      return;
+    }
+
+    try {
+      const availableDuplication = await checkAvailableEmail(email);
+      setErrors(prev => ({ ...prev, email: availableDuplication || '' }));
+    } catch (error) {
+      console.error('이메일 중복 확인 중 오류 발생:', error);
+    }
   };
 
   const handlePasswordChange = e => {
