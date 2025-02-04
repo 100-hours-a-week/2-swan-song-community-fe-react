@@ -34,6 +34,11 @@
   align-items: center;
 }
 
+.headerTitleWrapper {
+  display: flex;
+  align-items: center;
+}
+
 .headerTitle {
   color: #f6f4f0;
   font-size: 42px;
