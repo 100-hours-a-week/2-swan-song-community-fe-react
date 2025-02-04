@@ -82,7 +82,6 @@ export default function Login() {
       const result = await response.json();
 
       if (result.code === 2000) {
-        resetPost();
         resetAuthState();
         const profileUrl = result.data.profileImageUrl
           ? result.data.profileImageUrl
