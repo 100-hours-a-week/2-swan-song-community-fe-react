@@ -7,9 +7,6 @@ import { useNavigate } from 'react-router-dom';
 // 외부 라이브러리
 import Cookies from 'js-cookie';
 
-// 전역 상태 및 컨텍스트
-import { usePostContext } from '../contexts/PostContext.jsx';
-
 // 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api.js';
 
@@ -30,6 +27,7 @@ import useFetch from '../hooks/useFetch.js';
 
 // 스타일 파일 (CSS Modules)
 import styles from './UserInfoModify.module.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 const initialState = {
   profileImageUrl: null,
@@ -60,7 +58,6 @@ const reducer = (state, action) => {
 };
 
 const UserInfoModify = () => {
-  const { adjustUpdatingUser } = usePostContext();
   const hasAlreadyProfileImage = useRef(false);
   const profileImageInput = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -71,7 +68,7 @@ const UserInfoModify = () => {
   const navigate = useNavigate();
   const originalNickname = useRef('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const queryClient = useQueryClient();
   const { isFetching, fetchData } = useFetch();
 
   useEffect(() => {
@@ -200,7 +197,6 @@ const UserInfoModify = () => {
       const data = await response.json();
 
       if (data.code === 2000) {
-        adjustUpdatingUser(data.data);
         navigate('/');
       } else {
         alert(data.message || '회원정보 수정에 실패했습니다.');

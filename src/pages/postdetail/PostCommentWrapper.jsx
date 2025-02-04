@@ -1,8 +1,5 @@
 import React, { useReducer, useState } from 'react';
 
-// 전역 상태 및 컨텍스트
-import { usePostContext } from '../../contexts/PostContext.jsx';
-
 // 프로젝트 내부 컴포넌트
 import CommentItem from '../../components/post/CommentItem.jsx';
 import { API_BASE_URL } from '../../constants/api.js';
@@ -10,6 +7,7 @@ import SubmitButton from '../../components/ui/SubmitButton.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './PostCommentWrapper.module.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 // 리듀서
 const commentReducer = (state, action) => {
@@ -67,9 +65,9 @@ export default function PostCommentWrapper({
     comments: post.comments,
     commentCount: post.comments.length,
   });
-  const { posts, updatePost } = usePostContext();
   const [commentInputText, setCommentInputText] = useState('');
   const [editCommentId, setEditCommentId] = useState(null);
+  const queryClient = useQueryClient();
 
   // 버튼 텍스트 동적 설정
   const commentInputButtonText = editCommentId ? '댓글 수정' : '댓글 등록';
@@ -94,10 +92,6 @@ export default function PostCommentWrapper({
         });
 
         setCommentInputText('');
-
-        const updatedPost = posts.find(post => post.postId === postId);
-        updatedPost.commentCount += 1;
-        updatePost(updatedPost);
       } else if (result.code === 4000) {
         alert(result.message);
       } else {
@@ -151,11 +145,8 @@ export default function PostCommentWrapper({
       });
       if (response.status === 204) {
         dispatch({ type: 'DELETE_COMMENT', payload: id, post, setPost });
-        const updatedPost = posts.find(post => post.postId === postId);
         setCommentInputText('');
         setEditCommentId(null);
-        updatedPost.commentCount -= 1;
-        updatePost(updatedPost);
       } else {
         console.error('댓글 삭제 실패');
       }

@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// 전역 상태 및 컨텍스트
-import { usePostContext } from '../contexts/PostContext.jsx';
-
 // 상수 및 환경 변수
 import { API_BASE_URL } from '../constants/api';
 
@@ -17,14 +14,16 @@ import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 스타일 파일 (CSS Modules)
 import styles from './PostUpload.module.css';
+import { useQueryClient } from '@tanstack/react-query';
 
 const PostUpload = () => {
-  const { posts, setPosts } = usePostContext();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const [isValid, setIsValid] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const navigate = useNavigate();
 
@@ -105,7 +104,6 @@ const PostUpload = () => {
       const result = await uploadPost(formData);
 
       if (result.code === 2001) {
-        setPosts([result.data, ...posts]);
         navigate('/');
       } else {
         alert(result.message || '게시글 업로드에 실패했습니다.');

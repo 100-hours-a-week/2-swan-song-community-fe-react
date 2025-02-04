@@ -16,7 +16,6 @@ import { API_BASE_URL } from '../constants/api.js';
 
 // 전역 상태 및 컨텍스트
 import { useAuth } from '../contexts/AuthContext';
-import { usePostContext } from '../contexts/PostContext';
 
 // 프로젝트 내부 에셋 (이미지 파일)
 import userDefaultProfile from '../assets/user_default_profile.svg';
@@ -35,7 +34,6 @@ export default function Login() {
   const [passwordHelperMessage, setPasswordHelperMessage] = useState('');
 
   const { updateAuthState, resetAuthState } = useAuth();
-  const { resetPost } = usePostContext();
   const navigate = useNavigate();
 
   const [emailError, setEmailError] = useState(true);

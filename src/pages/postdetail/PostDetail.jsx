@@ -10,9 +10,6 @@ import { API_BASE_URL } from '../../constants/api.js';
 // 외부 라이브러리
 import classNames from 'classnames';
 
-// 전역 상태 및 컨텍스트
-import { usePostContext } from '../../contexts/PostContext.jsx';
-
 // 프로젝트 내부 컴포넌트
 import Button from '../../components/ui/Button.jsx';
 import RemoveModal from '../../components/ui/RemoveModal.jsx';
@@ -68,7 +65,6 @@ const PostDetail = () => {
   const postId = parseInt(postIdStr, 10);
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { updatePost, removePost } = usePostContext();
   const userId = useRef(null);
   const [post, setPost] = useState(null);
 
@@ -105,7 +101,6 @@ const PostDetail = () => {
         method: 'DELETE',
         credentials: 'include',
       });
-      removePost(postId);
       navigate('/');
     } catch (error) {
       console.error('게시글 삭제 중 오류가 발생했습니다:', error);

@@ -11,10 +11,12 @@ import {
 
 // 전역 상태 및 컨텍스트
 import { AuthProvider } from './contexts/AuthContext.jsx';
-import { PostProvider } from './contexts/PostContext.jsx';
 
 // 프로젝트 내부 컴포넌트
 import Header from './components/Header.jsx';
+
+// React Query 라이브러리
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // 프로젝트 페이지 컴포넌트
 import Login from './pages/Login.jsx';
@@ -27,9 +29,11 @@ import UserInfoModify from './pages/UserInfoModify.jsx';
 import UserPasswordModify from './pages/UserPasswordModify.jsx';
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
     <Router>
-      <PostProvider>
+      <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <ConditionalHeader />
           <Routes>
@@ -46,7 +50,7 @@ function App() {
             />
           </Routes>
         </AuthProvider>
-      </PostProvider>
+      </QueryClientProvider>
     </Router>
   );
 }
