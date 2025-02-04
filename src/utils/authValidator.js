@@ -21,5 +21,8 @@ export const validatePassword = password => {
     : '* 비밀번호는 8자 이상 20자 이하이며, 공백 없이 특수문자, 영어 대문자, 영어 소문자, 숫자를 각각 하나 이상 포함해야 합니다.';
 };
 
+export const validateCurrentAndNewPassword = (currentPassword, newPassword) =>
+  currentPassword === newPassword ? '* 현재 비밀번호와 다른 비밀번호를 입력하세요.' : '';
+
 export const validatePasswordCheck = (password, passwordChecker) =>
   password === passwordChecker ? '' : '* 비밀번호가 일치하지 않습니다.';

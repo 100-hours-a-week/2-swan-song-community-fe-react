@@ -14,6 +14,7 @@ import WithAuthenticated from '../components/HOC/WithAuthenticated.jsx';
 
 // 프로젝트 내부 util 함수
 import {
+  validateCurrentAndNewPassword,
   validatePassword,
   validatePasswordCheck,
 } from '../utils/authValidator.js';
@@ -23,14 +24,27 @@ import styles from './UserPasswordModify.module.css';
 
 const UserPasswordModify = () => {
   const navigate = useNavigate();
+  const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
+  const [currentPasswordMessage, setCurrentPasswordMessage] = useState('');
   const [newPasswordMessage, setNewPasswordMessage] = useState('');
   const [passwordCheckMessage, setPasswordCheckMessage] = useState('');
+  const [currentPasswordStatus, setCurrentPasswordStatus] = useState(false);
   const [newPasswordStatus, setNewPasswordStatus] = useState(false);
   const [passwordCheckStatus, setPasswordCheckStatus] = useState(false);
+  const [isNewPasswordTouching, setIsNewPasswordTouching] =
+    useState(false);
   const [isPasswordCheckerTouching, setIsPasswordCheckerTouching] =
     useState(false);
+
+  useEffect(() => {
+    if (isNewPasswordTouching) {
+      const errorMessage = validateCurrentAndNewPassword(currentPassword, newPassword);
+      setNewPasswordMessage(errorMessage);
+      setNewPasswordStatus(errorMessage === '');
+    }
+  }, [currentPassword, isNewPasswordTouching]);
 
   useEffect(() => {
     if (isPasswordCheckerTouching) {
@@ -40,10 +54,19 @@ const UserPasswordModify = () => {
     }
   }, [newPassword, isPasswordCheckerTouching]);
 
-  const handlePasswordChange = e => {
+  const handleCurrentPasswordChange = e => {
+    const password = e.target.value;
+    setCurrentPassword(password);
+    const errorMessage = validatePassword(password);
+    setCurrentPasswordMessage(errorMessage);
+    setCurrentPasswordStatus(errorMessage === '');
+    setIsNewPasswordTouching(true);
+  };
+
+  const handleNewPasswordChange = e => {
     const password = e.target.value;
     setNewPassword(password);
-    const errorMessage = validatePassword(password);
+    const errorMessage = validatePassword(password) || validateCurrentAndNewPassword(currentPassword, password);
     setNewPasswordMessage(errorMessage);
     setNewPasswordStatus(errorMessage === '');
   };
@@ -67,6 +90,7 @@ const UserPasswordModify = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          currentPassword: btoa(currentPassword),
           newPassword: btoa(newPassword),
           passwordCheck: btoa(passwordCheck),
         }),
@@ -77,7 +101,7 @@ const UserPasswordModify = () => {
       if (jsonData.code === 2000) {
         alert('비밀번호가 성공적으로 수정되었습니다.');
         navigate('/');
-      } else if (jsonData.code === 4000) {
+      } else if (jsonData.code === 4000 || jsonData.code === 4003) {
         alert(jsonData.message);
       } else {
         alert('비밀번호 수정에 실패했습니다.');
@@ -91,11 +115,22 @@ const UserPasswordModify = () => {
       <h1 className={styles.headerStr}>비밀번호 수정</h1>
       <form className={styles.userPasswordModifyForm}>
         <InputField
+          label="현재 비밀번호"
+          name="currentPassword"
+          type="password"
+          value={currentPassword}
+          onChange={handleCurrentPasswordChange}
+          placeholder="현재 비밀번호를 입력하세요"
+          isError={!currentPasswordStatus}
+          helperMessage={currentPasswordMessage}
+        />
+        <div style={{border: "0.6px solid #2e507760", borderRadius: "4px"}} />
+        <InputField
           label="새 비밀번호"
           name="newPassword"
           type="password"
           value={newPassword}
-          onChange={handlePasswordChange}
+          onChange={handleNewPasswordChange}
           placeholder="새 비밀번호를 입력하세요"
           isError={!newPasswordStatus}
           helperMessage={newPasswordMessage}
