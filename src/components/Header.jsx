@@ -99,7 +99,12 @@ export default function Header({ backUrl, containProfileDropdown }) {
             </Link>
           </div>
         )}
-        <div className={styles.headerTitleWrapper} onClick={() => { navigate('/') }}>
+        <div
+          className={styles.headerTitleWrapper}
+          onClick={() => {
+            navigate('/');
+          }}
+        >
           <h1 className={styles.headerTitle}>COM</h1>
           <h1 className={styles.headerTitle}>munity</h1>
         </div>

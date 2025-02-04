@@ -17,7 +17,6 @@ import styles from './PostUpload.module.css';
 import { useQueryClient } from '@tanstack/react-query';
 
 const PostUpload = () => {
-
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);

@@ -22,7 +22,9 @@ export const validatePassword = password => {
 };
 
 export const validateCurrentAndNewPassword = (currentPassword, newPassword) =>
-  currentPassword === newPassword ? '* 현재 비밀번호와 다른 비밀번호를 입력하세요.' : '';
+  currentPassword === newPassword
+    ? '* 현재 비밀번호와 다른 비밀번호를 입력하세요.'
+    : '';
 
 export const validatePasswordCheck = (password, passwordChecker) =>
   password === passwordChecker ? '' : '* 비밀번호가 일치하지 않습니다.';

@@ -12,8 +12,7 @@ import InputField from '../components/ui/InputField';
 import SubmitButton from '../components/ui/SubmitButton';
 import ProfileImageInput from '../components/ui/ProfileImageInput';
 
-
-import  axios  from 'axios';
+import axios from 'axios';
 
 // 프로젝트 내부 util 함수
 import {
@@ -98,17 +97,17 @@ export default function Register() {
     }
   };
 
-
   const checkAvailableEmail = async email => {
-
-    const response = (await axios.get(`${API_BASE_URL}/auth/check-email?email=${email}`)).data;
+    const response = (
+      await axios.get(`${API_BASE_URL}/auth/check-email?email=${email}`)
+    ).data;
 
     if (response.data.isAvailable) {
       return '';
     } else {
       return '* 이미 가입된 이메일입니다.';
     }
-  }
+  };
 
   const handleEmailChange = async e => {
     const email = e.target.value;

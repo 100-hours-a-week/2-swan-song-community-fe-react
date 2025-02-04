@@ -33,14 +33,16 @@ const UserPasswordModify = () => {
   const [currentPasswordStatus, setCurrentPasswordStatus] = useState(false);
   const [newPasswordStatus, setNewPasswordStatus] = useState(false);
   const [passwordCheckStatus, setPasswordCheckStatus] = useState(false);
-  const [isNewPasswordTouching, setIsNewPasswordTouching] =
-    useState(false);
+  const [isNewPasswordTouching, setIsNewPasswordTouching] = useState(false);
   const [isPasswordCheckerTouching, setIsPasswordCheckerTouching] =
     useState(false);
 
   useEffect(() => {
     if (isNewPasswordTouching) {
-      const errorMessage = validateCurrentAndNewPassword(currentPassword, newPassword);
+      const errorMessage = validateCurrentAndNewPassword(
+        currentPassword,
+        newPassword,
+      );
       setNewPasswordMessage(errorMessage);
       setNewPasswordStatus(errorMessage === '');
     }
@@ -66,7 +68,9 @@ const UserPasswordModify = () => {
   const handleNewPasswordChange = e => {
     const password = e.target.value;
     setNewPassword(password);
-    const errorMessage = validatePassword(password) || validateCurrentAndNewPassword(currentPassword, password);
+    const errorMessage =
+      validatePassword(password) ||
+      validateCurrentAndNewPassword(currentPassword, password);
     setNewPasswordMessage(errorMessage);
     setNewPasswordStatus(errorMessage === '');
   };
@@ -124,7 +128,7 @@ const UserPasswordModify = () => {
           isError={!currentPasswordStatus}
           helperMessage={currentPasswordMessage}
         />
-        <div style={{border: "0.6px solid #2e507760", borderRadius: "4px"}} />
+        <div style={{ border: '0.6px solid #2e507760', borderRadius: '4px' }} />
         <InputField
           label="새 비밀번호"
           name="newPassword"
