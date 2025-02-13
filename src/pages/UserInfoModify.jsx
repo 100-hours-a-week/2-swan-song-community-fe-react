@@ -213,7 +213,7 @@ const UserInfoModify = () => {
         credentials: 'include',
       });
 
-      const res = await response.json();
+      const res = response;
 
       if (res.status === 204) {
         alert('회원 탈퇴가 완료되었습니다.');

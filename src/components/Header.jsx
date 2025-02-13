@@ -9,7 +9,6 @@ import Cookies from 'js-cookie';
 import { API_BASE_URL } from '../constants/api.js';
 
 // 프로젝트 내부 에셋 (이미지 파일)
-import shevlonLeft from '../assets/shevlon_left.svg';
 import userDefaultProfile from '../assets/user_default_profile.svg';
 
 // 전역 상태 및 컨텍스트
